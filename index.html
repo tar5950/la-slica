@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Slica — Pizza Street</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,300;0,400;0,700;0,900;1,900&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--n:#080808;--v:#1e8c47;--vv:#33e06b;--w:#f4efe6;--g:#666;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-snap-type:y mandatory;overflow-y:scroll}
+body{background:var(--n);color:var(--w);font-family:'Barlow',sans-serif}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 5%;display:flex;align-items:center;justify-content:space-between;transition:background .3s}
+#nav.dark{background:rgba(8,8,8,.96);border-bottom:1px solid rgba(255,255,255,.06)}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:.12em;color:var(--w);text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo-pip{width:8px;height:8px;background:var(--vv);border-radius:50%}
+.nav-r{display:flex;align-items:center;gap:20px}
+.nav-l{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(244,239,230,.45);text-decoration:none;transition:color .2s}
+.nav-l:hover{color:var(--vv)}
+.nav-o{background:var(--v);color:var(--w);padding:9px 20px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:900;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;border:2px solid var(--v);transition:all .2s}
+.nav-o:hover{background:transparent;color:var(--vv);border-color:var(--vv)}
+
+/* PANELS */
+.snap{height:100vh;min-height:560px;scroll-snap-align:start;position:relative;overflow:hidden}
+
+/* HERO */
+#p1{display:flex;align-items:flex-end}
+.vid-wrap{position:absolute;inset:0}
+.vid-wrap video{width:100%;height:100%;object-fit:cover}
+.vid-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,1) 0%,rgba(8,8,8,.55) 30%,rgba(8,8,8,.1) 65%,transparent 100%)}
+.hero-copy{position:relative;z-index:10;padding:0 5% 56px;width:100%}
+.hk{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.4em;text-transform:uppercase;color:var(--vv);margin-bottom:12px;opacity:0;animation:fu .7s .3s ease forwards}
+.hh{font-family:'Bebas Neue',sans-serif;font-size:clamp(80px,16vw,220px);line-height:.82;letter-spacing:.02em;color:var(--w);margin-bottom:20px;opacity:0;animation:fu .8s .5s ease forwards}
+.hh .outline{color:transparent;-webkit-text-stroke:2px var(--vv);display:block}
+.hh .solid{color:var(--vv);display:block}
+.hbot{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;opacity:0;animation:fu .7s .9s ease forwards}
+.htag{font-size:14px;color:rgba(244,239,230,.5);line-height:1.7;max-width:300px;font-weight:300}
+.hcta{display:flex;gap:12px;flex-wrap:wrap}
+.btn-v{display:inline-flex;align-items:center;gap:8px;background:var(--v);color:var(--w);padding:14px 28px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;border:2px solid var(--v);cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.btn-v::after{content:'';position:absolute;inset:0;background:var(--vv);transform:translateX(-101%);transition:transform .25s;z-index:0}
+.btn-v:hover::after{transform:translateX(0)}
+.btn-v:hover{color:var(--n);border-color:var(--vv)}
+.btn-v span{position:relative;z-index:1}
+.btn-g{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--w);padding:14px 24px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border:2px solid rgba(244,239,230,.2);cursor:pointer;transition:border-color .2s}
+.btn-g:hover{border-color:var(--w)}
+.scroll-hint{position:absolute;bottom:28px;right:5%;display:flex;flex-direction:column;align-items:center;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(244,239,230,.3);z-index:10;opacity:0;animation:fu .7s 1.4s ease forwards}
+.sh-line{width:1px;height:48px;background:linear-gradient(to bottom,transparent,rgba(244,239,230,.3));animation:pulse-l 2s infinite}
+@keyframes pulse-l{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes fu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* PANEL 2 — GREEN STATEMENT */
+#p2{background:var(--v);display:flex;flex-direction:column;justify-content:center;scroll-snap-align:start}
+.tkr{overflow:hidden;padding:14px 0;border-top:2px solid rgba(8,8,8,.2);border-bottom:2px solid rgba(8,8,8,.2);background:rgba(8,8,8,.15);position:absolute;left:0;right:0}
+.tkr.top{top:0}
+.tkr.bot{bottom:0}
+.ttrack{display:flex;white-space:nowrap;animation:troll 14s linear infinite}
+.ttrack.rev{animation-direction:reverse}
+@keyframes troll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ti{display:inline-flex;align-items:center;gap:16px;padding:0 28px;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.1em;color:var(--w)}
+.ti-s{color:rgba(255,255,255,.35);font-size:22px}
+.stmt{padding:0 5%;position:relative;z-index:1}
+.stmt-eye{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.35em;text-transform:uppercase;color:rgba(244,239,230,.6);margin-bottom:16px}
+.stmt-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,10vw,140px);line-height:.88;letter-spacing:.02em;color:var(--w);margin-bottom:28px}
+.stmt-h em{font-style:italic;color:var(--n);font-family:'Barlow Condensed',sans-serif;font-weight:900;display:block;font-size:clamp(44px,8vw,110px)}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;max-width:760px}
+.pb{background:rgba(8,8,8,.2);padding:18px;border-top:3px solid rgba(244,239,230,.2)}
+.pb-i{font-size:22px;margin-bottom:8px}
+.pb-t{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--w);margin-bottom:3px}
+.pb-d{font-size:11px;color:rgba(244,239,230,.6);line-height:1.5}
+
+/* PANEL 3 — MENU */
+#p3{display:flex;flex-direction:column;background:var(--n);scroll-snap-align:start}
+.menu-hdr{padding:88px 5% 24px;display:flex;align-items:flex-end;justify-content:space-between;border-bottom:1px solid rgba(244,239,230,.07);flex-shrink:0;flex-wrap:wrap;gap:16px}
+.menu-ttl{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,7vw,88px);line-height:.88;letter-spacing:.03em;color:var(--w)}
+.menu-ttl span{color:var(--vv)}
+.menu-body{flex:1;overflow-y:auto;padding:0 5% 16px;scrollbar-width:thin;scrollbar-color:var(--v) transparent}
+.menu-body::-webkit-scrollbar{width:3px}
+.menu-body::-webkit-scrollbar-thumb{background:var(--v)}
+.plist{padding-top:16px}
+.prow{display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px;padding:18px 0;border-bottom:1px solid rgba(244,239,230,.05);cursor:pointer;position:relative}
+.prow::before{content:'';position:absolute;left:-5%;right:-5%;top:0;bottom:0;background:rgba(30,140,71,.05);opacity:0;transition:opacity .2s}
+.prow:hover::before{opacity:1}
+.prow-l{display:flex;align-items:center;gap:16px}
+.pnum{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.1em;color:var(--vv);opacity:.5;width:26px;flex-shrink:0}
+.pthumb{width:60px;height:60px;overflow:hidden;flex-shrink:0}
+.pthumb img{width:100%;height:100%;object-fit:cover;filter:brightness(.8)}
+.pname{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:19px;letter-spacing:.06em;text-transform:uppercase;color:var(--w);margin-bottom:3px}
+.pbdg{font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:var(--v);color:var(--w);padding:2px 7px;margin-left:7px;vertical-align:middle}
+.pdesc{font-size:12px;color:var(--g);line-height:1.4}
+.prow-r{display:flex;align-items:center;gap:14px}
+.pprice{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--vv);line-height:1}
+.pprice .old{font-family:'Barlow Condensed',sans-serif;font-size:13px;color:var(--g);text-decoration:line-through;margin-left:4px}
+.qty{display:flex;align-items:center;border:1px solid rgba(30,140,71,.4)}
+.qb{width:27px;height:27px;background:transparent;border:none;color:var(--w);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
+.qb:hover{background:var(--v)}
+.qn{width:27px;text-align:center;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:var(--w);background:transparent;border:none;pointer-events:none}
+.xbar{display:flex;gap:2px;padding:14px 5%;background:rgba(30,140,71,.06);border-top:1px solid rgba(30,140,71,.14);flex-shrink:0;overflow-x:auto}
+.xpill{display:flex;align-items:center;gap:8px;background:rgba(30,140,71,.1);border:1px solid rgba(30,140,71,.22);padding:8px 14px;cursor:pointer;white-space:nowrap;transition:background .2s;flex-shrink:0}
+.xpill:hover{background:rgba(30,140,71,.25)}
+.xpill-n{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--w)}
+.xpill-p{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--vv)}
+
+/* PANEL 4 — COMMANDER */
+#p4{display:grid;grid-template-columns:1fr 1fr;scroll-snap-align:start}
+.cmd-l{background:var(--v);padding:88px 6% 48px;display:flex;flex-direction:column;justify-content:center;overflow-y:auto}
+.cmd-ttl{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,6vw,80px);line-height:.88;letter-spacing:.03em;color:var(--w);margin-bottom:36px}
+.steps{display:flex;flex-direction:column}
+.step{display:flex;gap:14px;padding:18px 0;border-bottom:1px solid rgba(244,239,230,.15)}
+.step:last-child{border:none}
+.sn{font-family:'Bebas Neue',sans-serif;font-size:42px;color:rgba(244,239,230,.25);line-height:1;flex-shrink:0;width:44px}
+.st{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--w);margin-bottom:4px}
+.sd{font-size:13px;color:rgba(244,239,230,.55);line-height:1.6}
+.dopts{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.dopt{flex:1;min-width:70px;border:2px solid rgba(244,239,230,.14);padding:10px 6px;text-align:center;cursor:pointer;transition:all .2s}
+.dopt:hover,.dopt.active{border-color:var(--n);background:rgba(8,8,8,.2)}
+.dopt-i{font-size:17px;margin-bottom:4px}
+.dopt-n{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--w)}
+.cmd-r{background:rgba(8,8,8,.98);padding:88px 5% 32px;display:flex;flex-direction:column;overflow-y:auto}
+.reg{background:rgba(30,140,71,.08);border-left:3px solid var(--vv);padding:12px 14px;margin-bottom:12px}
+.reg-l{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--vv);margin-bottom:8px}
+.reg-r{display:flex;gap:6px}
+.reg-i{flex:1;background:rgba(244,239,230,.05);border:1px solid rgba(30,140,71,.25);color:var(--w);padding:8px 12px;font-family:'Barlow',sans-serif;font-size:13px;outline:none}
+.reg-i:focus{border-color:var(--vv)}
+.reg-b{background:var(--v);color:var(--w);border:none;padding:8px 14px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:background .2s}
+.reg-b:hover{background:var(--vv);color:var(--n)}
+.reg-ok{font-size:11px;color:#25D366;margin-top:6px;display:none}
+.fidel{display:flex;align-items:center;gap:12px;background:rgba(244,239,230,.03);border-left:3px solid var(--vv);padding:12px 14px;margin-bottom:12px}
+.ft{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--vv);margin-bottom:3px}
+.fd{font-size:11px;color:var(--g)}
+.fdots{display:flex;gap:3px;margin-top:5px}
+.fdot{width:10px;height:10px;border-radius:50%;border:1px solid rgba(30,140,71,.3)}
+.fdot.on{background:var(--vv);border-color:var(--vv)}
+.reco{width:100%;background:transparent;border:1px solid rgba(30,140,71,.2);color:var(--g);padding:8px;font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s;margin-bottom:10px;display:none}
+.reco.show{display:block}
+.reco:hover{border-color:var(--v);color:var(--w)}
+.cart-ttl-row{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.08em;color:var(--w);margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid rgba(244,239,230,.07)}
+.cbdg{background:var(--v);color:var(--w);font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;padding:2px 10px;letter-spacing:.08em}
+.citems{flex:1;min-height:56px;margin-bottom:14px;overflow-y:auto}
+.cempty{text-align:center;padding:20px 0;color:var(--g);font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;border:1px dashed rgba(30,140,71,.2)}
+.citem{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid rgba(244,239,230,.04)}
+.cin{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--w)}
+.ciq{font-size:10px;color:var(--g);margin-top:2px}
+.cip{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--vv)}
+.ctot{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-top:2px solid var(--v);margin-bottom:12px}
+.ctl{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--g)}
+.ctv{font-family:'Bebas Neue',sans-serif;font-size:34px;color:var(--w)}
+.wa{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:15px;background:#25D366;color:var(--w);font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;transition:background .2s}
+.wa:hover{background:#1da855}
+.cnote{text-align:center;font-size:10px;color:var(--g);margin-top:8px;font-family:'Barlow Condensed',sans-serif;letter-spacing:.08em;text-transform:uppercase}
+
+/* PANEL 5 — AVIS */
+#p5{background:var(--w);display:flex;flex-direction:column;justify-content:center;padding:88px 5% 60px;color:var(--n);scroll-snap-align:start;overflow:hidden}
+.avis-hdr{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:44px;flex-wrap:wrap;gap:16px}
+.avis-ttl{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,9vw,120px);line-height:.88;letter-spacing:.02em;color:var(--n)}
+.avis-ttl span{color:var(--v)}
+.avis-score{display:flex;align-items:center;gap:16px}
+.avis-num{font-family:'Bebas Neue',sans-serif;font-size:72px;color:var(--n);line-height:1}
+.avis-stars{color:var(--v);font-size:18px;letter-spacing:2px;margin-bottom:4px}
+.avis-cnt{font-size:11px;color:var(--g);font-family:'Barlow Condensed',sans-serif;letter-spacing:.1em}
+.revcols{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.revcol{background:rgba(8,8,8,.04);padding:24px;border-top:3px solid transparent;transition:border-color .2s}
+.revcol:nth-child(2){background:var(--v);color:var(--w)}
+.revcol:hover{border-color:var(--v)}
+.revcol:nth-child(2):hover{border-color:var(--n)}
+.rev-st{font-size:13px;letter-spacing:2px;color:var(--v);margin-bottom:12px}
+.revcol:nth-child(2) .rev-st{color:var(--w)}
+.rev-q{font-size:13px;line-height:1.7;font-style:italic;margin-bottom:14px}
+.rev-a{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.5}
+
+/* PANEL 6 — FOOTER */
+#p6{background:var(--n);display:flex;flex-direction:column;justify-content:space-between;padding:88px 5% 36px;overflow:hidden;position:relative;scroll-snap-align:start}
+.ft-bgw{position:absolute;bottom:-60px;left:-3%;font-family:'Bebas Neue',sans-serif;font-size:clamp(120px,25vw,320px);color:rgba(30,140,71,.04);letter-spacing:.04em;pointer-events:none;user-select:none;line-height:1}
+.ft-logo{font-family:'Bebas Neue',sans-serif;font-size:clamp(60px,12vw,160px);line-height:.88;letter-spacing:.04em;color:var(--w);text-decoration:none;display:block;margin-bottom:6px}
+.ft-sub{font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:.25em;text-transform:uppercase;color:var(--vv);margin-bottom:36px}
+.ft-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:36px;position:relative;z-index:1}
+.ftl{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--vv);margin-bottom:12px}
+.fti{font-size:13px;color:rgba(244,239,230,.45);line-height:1.8}
+.fti strong{color:var(--w);font-weight:400}
+.ft-btm{display:flex;justify-content:space-between;padding-top:24px;border-top:1px solid rgba(244,239,230,.06);position:relative;z-index:1;flex-wrap:wrap;gap:10px}
+.ft-copy{font-size:10px;color:rgba(244,239,230,.18);font-family:'Barlow Condensed',sans-serif;letter-spacing:.1em;text-transform:uppercase}
+
+/* UPSELL */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s;backdrop-filter:blur(4px)}
+.modal-bg.show{opacity:1;pointer-events:all}
+.modal-box{background:#111;border:2px solid var(--v);border-top:4px solid var(--vv);max-width:420px;width:90%;transform:scale(.95);transition:transform .25s}
+.modal-bg.show .modal-box{transform:scale(1)}
+.mh{background:var(--v);padding:14px 18px}
+.mt{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.1em;color:var(--w)}
+.mb{padding:18px}
+.ms{font-size:12px;color:var(--g);margin-bottom:14px;font-family:'Barlow Condensed',sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.ur{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid rgba(244,239,230,.05);gap:8px}
+.un{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--w)}
+.usub{font-size:10px;color:var(--g);margin-top:2px}
+.urr{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.up{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--vv)}
+.ua{background:var(--v);color:var(--w);border:none;padding:6px 12px;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:background .2s;white-space:nowrap}
+.ua:hover{background:var(--vv);color:var(--n)}
+.mf{padding:0 18px 18px;display:flex;flex-direction:column;gap:8px}
+.mok{width:100%;padding:13px;background:var(--v);color:var(--w);border:none;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;transition:background .2s}
+.mok:hover{background:var(--vv);color:var(--n)}
+.msk{width:100%;padding:11px;background:transparent;border:1px solid rgba(244,239,230,.1);color:var(--g);cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;transition:all .2s}
+.msk:hover{border-color:var(--w);color:var(--w)}
+
+/* NOTIF */
+.notif{position:fixed;bottom:24px;left:24px;background:#111;border:2px solid var(--v);border-left:5px solid var(--vv);max-width:290px;width:calc(100% - 48px);z-index:200;transform:translateX(-120%);transition:transform .5s cubic-bezier(.34,1.56,.64,1);pointer-events:none;box-shadow:0 8px 24px rgba(0,0,0,.6)}
+.notif.show{transform:translateX(0)}
+.notif-top{background:rgba(30,140,71,.15);padding:7px 14px;display:flex;align-items:center;gap:8px}
+.ndot{width:7px;height:7px;background:#25D366;border-radius:50%;animation:pulse 1.5s infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.nlbl{font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(51,224,107,.8)}
+.nbody{padding:12px 14px}
+.nname{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:.06em;color:var(--w);margin-bottom:3px}
+.ntxt{font-size:12px;color:rgba(244,239,230,.6);line-height:1.4}
+.ntxt strong{color:var(--vv)}
+.ntime{font-size:10px;color:var(--g);margin-top:6px;font-family:'Barlow Condensed',sans-serif}
+
+/* STICKY */
+.sticky{position:fixed;bottom:0;left:0;right:0;background:rgba(8,8,8,.97);border-top:3px solid var(--v);padding:11px 5%;display:flex;align-items:center;justify-content:space-between;gap:12px;z-index:80;transform:translateY(100%);transition:transform .3s;backdrop-filter:blur(8px)}
+.sticky.show{transform:translateY(0)}
+.sticky-t{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--w)}
+.sticky-t span{color:var(--vv)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  html{scroll-snap-type:none}
+  .snap,#p1,#p2,#p3,#p4,#p5,#p6{height:auto;min-height:100svh;scroll-snap-align:none}
+  #p4{grid-template-columns:1fr}
+  .cmd-l{padding:80px 5% 40px}
+  .cmd-r{padding:40px 5%}
+  .revcols{grid-template-columns:1fr}
+  .ft-grid{grid-template-columns:1fr 1fr}
+  .nav-r .nav-l{display:none}
+  .pillars{grid-template-columns:1fr}
+  #p3{height:auto}
+}
+@media(max-width:600px){
+  nav{padding:16px 4%}
+  .logo{font-size:22px}
+  .nav-o{padding:7px 12px;font-size:11px}
+  .hh{font-size:clamp(68px,18vw,100px)}
+  .hcta{flex-direction:column}
+  .btn-v,.btn-g{width:100%;justify-content:center}
+  .hbot{flex-direction:column;align-items:flex-start}
+  #p2{padding:0}
+  .stmt{padding:0 4%}
+  .menu-hdr{padding:72px 4% 18px}
+  .menu-body{padding:0 4% 14px}
+  .xbar{padding:12px 4%}
+  #p5{padding:72px 4% 40px}
+  .ft-grid{grid-template-columns:1fr}
+  #p6{padding:72px 4% 28px}
+  .ft-btm{flex-direction:column;gap:8px;text-align:center}
+  .notif{left:10px;right:10px;max-width:none;width:auto;bottom:74px}
+  .sticky{padding:10px 4%}
+  .pthumb{width:48px;height:48px}
+}
+@media(max-width:380px){.nav-o{display:none}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#p1" class="logo"><span class="logo-pip"></span>La Slica</a>
+  <div class="nav-r">
+    <a href="#p3" class="nav-l">La Carte</a>
+    <a href="#p4" class="nav-l">Commander</a>
+    <a href="#p5" class="nav-l">Avis</a>
+    <a href="https://wa.me/33600000000?text=Yo%20je%20veux%20commander%20%F0%9F%8D%95" target="_blank" class="nav-o">Commander</a>
+  </div>
+</nav>
+
+<!-- P1 HERO -->
+<section id="p1" class="snap">
+  <div class="vid-wrap">
+    <video id="heroVideo" autoplay muted playsinline preload="auto" webkit-playsinline>
+      <source src="https://res.cloudinary.com/dzh5vllay/video/upload/q_auto,w_720/v1776032318/kling_20260413_%E4%BD%9C%E5%93%81_Cinematic__1581_0_eqi5xe.mp4" type="video/mp4" media="(max-width:600px)">
+      <source src="https://res.cloudinary.com/dzh5vllay/video/upload/v1776032318/kling_20260413_%E4%BD%9C%E5%93%81_Cinematic__1581_0_eqi5xe.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-copy">
+    <div class="hk">Napoli x Street — Four à Bois — Pâte 48h</div>
+    <div class="hh">
+      <span class="outline">La</span>
+      <span class="solid">Slica</span>
+    </div>
+    <div class="hbot">
+      <p class="htag">Pâte maison fermentée 48h. Four à bois 450°. Ingrédients frais. Commandée en 30 secondes.</p>
+      <div class="hcta">
+        <a href="#p4" class="btn-v"><span>🍕 Commander maintenant</span></a>
+        <a href="tel:0600000000" class="btn-g">📞 Appeler</a>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint"><span>Scroll</span><div class="sh-line"></div></div>
+</section>
+
+<!-- P2 STATEMENT -->
+<section id="p2" class="snap">
+  <div class="tkr top">
+    <div class="ttrack">
+      <span class="ti">Pâte 48h <span class="ti-s">●</span></span><span class="ti">Four à Bois 450° <span class="ti-s">●</span></span><span class="ti">100% Halal <span class="ti-s">●</span></span><span class="ti">Ingrédients Frais <span class="ti-s">●</span></span><span class="ti">Napoli × Street <span class="ti-s">●</span></span><span class="ti">Jamais Surgelé <span class="ti-s">●</span></span>
+      <span class="ti">Pâte 48h <span class="ti-s">●</span></span><span class="ti">Four à Bois 450° <span class="ti-s">●</span></span><span class="ti">100% Halal <span class="ti-s">●</span></span><span class="ti">Ingrédients Frais <span class="ti-s">●</span></span><span class="ti">Napoli × Street <span class="ti-s">●</span></span><span class="ti">Jamais Surgelé <span class="ti-s">●</span></span>
+    </div>
+  </div>
+  <div class="stmt">
+    <div class="stmt-eye">Notre philosophie</div>
+    <div class="stmt-h">Pas de<br>surgelé.<br><em>Jamais.</em></div>
+    <div class="pillars">
+      <div class="pb"><div class="pb-i">🌾</div><div class="pb-t">Pâte fermentée 48h</div><div class="pb-d">Farine italienne type 00, levure naturelle.</div></div>
+      <div class="pb"><div class="pb-i">🔥</div><div class="pb-t">Four à bois 450°</div><div class="pb-d">Cuisson 90 secondes. Bords soufflés.</div></div>
+      <div class="pb"><div class="pb-i">🍅</div><div class="pb-t">San Marzano DOP</div><div class="pb-d">La base de toute bonne pizza napolitaine.</div></div>
+    </div>
+  </div>
+  <div class="tkr bot">
+    <div class="ttrack rev">
+      <span class="ti">La Margherita <span class="ti-s">●</span></span><span class="ti">La Diavola <span class="ti-s">●</span></span><span class="ti">La Suprême <span class="ti-s">●</span></span><span class="ti">Le Calzone <span class="ti-s">●</span></span><span class="ti">La 4 Fromages <span class="ti-s">●</span></span><span class="ti">La Veggie <span class="ti-s">●</span></span>
+      <span class="ti">La Margherita <span class="ti-s">●</span></span><span class="ti">La Diavola <span class="ti-s">●</span></span><span class="ti">La Suprême <span class="ti-s">●</span></span><span class="ti">Le Calzone <span class="ti-s">●</span></span><span class="ti">La 4 Fromages <span class="ti-s">●</span></span><span class="ti">La Veggie <span class="ti-s">●</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- P3 MENU -->
+<section id="p3" class="snap">
+  <div class="menu-hdr">
+    <div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:var(--vv);margin-bottom:8px">La Carte</div>
+      <div class="menu-ttl">Nos <span>Pizzas</span></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:var(--w);line-height:1">4.9</div>
+      <div><div style="color:var(--vv);font-size:16px;letter-spacing:2px;margin-bottom:3px">★★★★★</div><div style="font-size:11px;color:var(--g);font-family:'Barlow Condensed',sans-serif;letter-spacing:.08em">180+ avis Google</div></div>
+    </div>
+  </div>
+  <div class="menu-body">
+    <div class="plist" id="menuGrid">
+      <div class="prow" data-id="margherita" data-name="La Margherita" data-price="10" data-old="14">
+        <div class="prow-l"><div class="pnum">01</div><div class="pthumb"><img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=200&q=80" alt=""></div><div><div class="pname">La Margherita <span class="pbdg">Best-seller</span></div><div class="pdesc">Sauce tomate San Marzano, mozzarella fior di latte, basilic frais.</div></div></div>
+        <div class="prow-r"><div class="pprice">10€ <span class="old">14€</span></div><div class="qty"><button class="qb" onclick="changeQty(this,-1)">−</button><span class="qn">0</span><button class="qb" onclick="changeQty(this,1)">+</button></div></div>
+      </div>
+      <div class="prow" data-id="4fromages" data-name="La 4 Fromages" data-price="13">
+        <div class="prow-l"><div class="pnum">02</div><div class="pthumb"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=200&q=80" alt=""></div><div><div class="pname">La 4 Fromages</div><div class="pdesc">Mozzarella, gorgonzola, chèvre, parmesan, miel de truffe.</div></div></div>
+        <div class="prow-r"><div class="pprice">13€</div><div class="qty"><button class="qb" onclick="changeQty(this,-1)">−</button><span class="qn">0</span><button class="qb" onclick="changeQty(this,1)">+</button></div></div>
+      </div>
+      <div class="prow" data-id="diavola" data-name="La Diavola" data-price="12">
+        <div class="prow-l"><div class="pnum">03</div><div class="pthumb"><img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=200&q=80" alt=""></div><div><div class="pname">La Diavola <span class="pbdg">🌶️ Piquante</span></div><div class="pdesc">Sauce tomate, mozzarella, salami piquant, piment calabrais.</div></div></div>
+        <div class="prow-r"><div class="pprice">12€</div><div class="qty"><button class="qb" onclick="changeQty(this,-1)">−</button><span class="qn">0</span><button class="qb" onclick="changeQty(this,1)">+</button></div></div>
+      </div>
+      <div class="prow" data-id="supreme-piz" data-name="La Suprême" data-price="14">
+        <div class="prow-l"><div class="pnum">04</div><div class="pthumb"><img src="https://images.unsplash.com/photo-1548369937-47519962c11a?w=200&q=80" alt=""></div><div><div class="pname">La Suprême <span class="pbdg">🔥 Signature</span></div><div class="pdesc">Crème, mozzarella, poulet grillé, champignons, truffes.</div></div></div>
+        <div class="prow-r"><div class="pprice">14€</div><div class="qty"><button class="qb" onclick="changeQty(this,-1)">−</button><span class="qn">0</span><button class="qb" onclick="changeQty(this,1)">+</button></div></div>
+      </div>
+      <div class="prow" data-id="veggie-piz" data-name="La Veggie" data-price="11">
+        <div class="prow-l"><div class="pnum">05</div><div class="pthumb"><img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=200&q=80" alt=""></div><div><div class="pname">La Veggie</div><div class="pdesc">Sauce pesto, mozzarella, courgettes, tomates cerises, roquette.</div></div></div>
+        <div class="prow-r"><div class="pprice">11€</div><div class="qty"><button class="qb" onclick="changeQty(this,-1)">−</button><span class="qn">0</span><button class="qb" onclick="changeQty(this,1)">+</button></div></div>
+      </div>
+      <div class="prow" data-id="calzone" data-name="Le Calzone" data-price="13" data-old="16">
+        <div class="prow-l"><div class="pnum">06</div><div class="pthumb"><img src="https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=200&q=80" alt=""></div><div><div class="pname">Le Calzone <span class="pbdg">💰 Promo</span></div><div class="pdesc">Farci ricotta, jambon, mozzarella, sauce tomate.</div></div></div>
+        <div class="prow-r"><div class="pprice">13€ <span class="old">16€</span></div><div class="qty"><button class="qb" onclick="changeQty(this,-1)">−</button><span class="qn">0</span><button class="qb" onclick="changeQty(this,1)">+</button></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="xbar">
+    <div class="xpill" data-id="tiramisu" data-name="Tiramisu" data-price="4" onclick="addExtra(this)"><div class="xpill-n">🍮 Tiramisu</div><div class="xpill-p">4€</div></div>
+    <div class="xpill" data-id="burrata" data-name="Burrata" data-price="5" onclick="addExtra(this)"><div class="xpill-n">🧀 Burrata</div><div class="xpill-p">5€</div></div>
+    <div class="xpill" data-id="sodapiz" data-name="Soda" data-price="2" onclick="addExtra(this)"><div class="xpill-n">🥤 Soda</div><div class="xpill-p">2€</div></div>
+    <div class="xpill" data-id="limonade" data-name="Limonade maison" data-price="3" onclick="addExtra(this)"><div class="xpill-n">🍋 Limonade</div><div class="xpill-p">3€</div></div>
+  </div>
+</section>
+
+<!-- P4 COMMANDER -->
+<section id="p4" class="snap" style="display:grid;grid-template-columns:1fr 1fr">
+  <div class="cmd-l">
+    <div class="cmd-ttl">Comment<br>ça<br>marche</div>
+    <div class="steps">
+      <div class="step"><div class="sn">01</div><div><div class="st">Choisis tes pizzas</div><div class="sd">Ajoute depuis la carte. Tout s'ajoute en temps réel.</div></div></div>
+      <div class="step"><div class="sn">02</div><div>
+        <div class="st">Ton mode de retrait</div><div class="sd">Livraison, sur place ou à emporter.</div>
+        <div class="dopts">
+          <label class="dopt active" onclick="selectDelivery(this,'livraison')"><div class="dopt-i">🛵</div><div class="dopt-n">Livraison</div></label>
+          <label class="dopt" onclick="selectDelivery(this,'surplace')"><div class="dopt-i">🍽️</div><div class="dopt-n">Sur place</div></label>
+          <label class="dopt" onclick="selectDelivery(this,'emporter')"><div class="dopt-i">🥡</div><div class="dopt-n">Emporter</div></label>
+        </div>
+      </div></div>
+      <div class="step"><div class="sn">03</div><div><div class="st">1 clic WhatsApp</div><div class="sd">Message pré-rempli. Confirmé sous 2 min.</div></div></div>
+    </div>
+  </div>
+  <div class="cmd-r">
+    <div class="reg">
+      <div class="reg-l">📲 Ton numéro = tes points fidélité</div>
+      <div class="reg-r"><input class="reg-i" type="tel" id="phoneInput" placeholder="06 XX XX XX XX" maxlength="14"><button class="reg-b" onclick="registerPhone()">OK</button></div>
+      <div class="reg-ok" id="regOk">✅ Enregistré — tu cumules des points !</div>
+    </div>
+    <div class="fidel">
+      <div style="font-size:20px;flex-shrink:0">⭐</div>
+      <div><div class="ft">10e commande offerte</div><div class="fd">1 point par commande.</div><div class="fdots" id="fidelDots"></div></div>
+    </div>
+    <button class="reco" id="recoBtn" onclick="recommande()">🔄 Recommander la même chose</button>
+    <div class="cart-ttl-row">Ma commande <span class="cbdg" id="cartCount">0</span></div>
+    <div class="citems" id="cartItems"><div class="cempty">Choisis tes pizzas ↑</div></div>
+    <div class="ctot"><span class="ctl">Total</span><span class="ctv" id="cartTotal">0€</span></div>
+    <a href="#" class="wa" onclick="triggerUpsell(event)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      Commander sur WhatsApp
+    </a>
+    <p class="cnote">Confirmé sous 2 min · Paiement à la livraison</p>
+  </div>
+</section>
+
+<!-- P5 AVIS -->
+<section id="p5" class="snap">
+  <div class="avis-hdr">
+    <div class="avis-ttl">Ils ont<br><span>Kiffé</span></div>
+    <div class="avis-score">
+      <div class="avis-num">4.9</div>
+      <div><div class="avis-stars">★★★★★</div><div class="avis-cnt">180+ avis Google vérifiés</div><a href="#" style="font-size:10px;color:var(--v);font-family:'Barlow Condensed',sans-serif;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;display:block;margin-top:5px">⭐ Laisser un avis →</a></div>
+    </div>
+  </div>
+  <div class="revcols">
+    <div class="revcol"><div class="rev-st">★★★★★</div><div class="rev-q">"La pâte c'est une autre planète. Moelleuse à l'intérieur, croustillante dehors. On sent que c'est fait maison. La meilleure pizza du secteur, point."</div><div class="rev-a">Sofia M.</div></div>
+    <div class="revcol"><div class="rev-st">★★★★★</div><div class="rev-q">"La Diavola c'est un feu d'artifice. Juste assez piquante, les ingrédients sont frais. Livraison en 25 min, pizza encore chaude. Je commande deux fois par semaine."</div><div class="rev-a">Rachid B.</div></div>
+    <div class="revcol"><div class="rev-st">★★★★★</div><div class="rev-q">"La Suprême avec la truffe c'est de la folie. On est dans une pizzeria de quartier mais le niveau c'est restaurant gastronomique. Chapeau."</div><div class="rev-a">Inès K.</div></div>
+  </div>
+</section>
+
+<!-- P6 FOOTER -->
+<section id="p6" class="snap">
+  <div class="ft-bgw">SLICA</div>
+  <div style="position:relative;z-index:1">
+    <a href="#p1" class="ft-logo">La Slica</a>
+    <div class="ft-sub">Pizza Street Authentique — Napoli × Street</div>
+    <div class="ft-grid">
+      <div><div class="ftl">Contact</div><div class="fti">📍 <strong>Notre quartier · Votre ville</strong></div><div class="fti">📞 <strong>06 00 00 00 00</strong></div><div class="fti">🕐 <strong>7j/7 · 17h – 23h</strong></div></div>
+      <div><div class="ftl">Livraison</div><div class="fti"><strong>Rayon 5km</strong></div><div class="fti">~25 min · Paiement livraison</div><div class="fti" style="margin-top:10px"><a href="https://wa.me/33600000000?text=Zone%20livraison%20?" target="_blank" style="color:var(--vv);font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none">Vérifier ma zone →</a></div></div>
+      <div><div class="ftl">Commander</div><div style="display:flex;flex-direction:column;gap:10px;margin-top:4px"><a href="https://wa.me/33600000000" target="_blank" class="btn-v" style="display:inline-flex;width:fit-content"><span>Commander →</span></a><a href="#" class="btn-g" style="width:fit-content;font-size:12px;padding:10px 18px">⭐ Laisser un avis</a></div></div>
+    </div>
+  </div>
+  <div class="ft-btm"><span class="ft-copy">© 2025 La Slica — Pizza Street Authentique</span><span class="ft-copy">fait avec 🍕</span></div>
+</section>
+
+<!-- UPSELL -->
+<div class="modal-bg" id="upsellModal">
+  <div class="modal-box">
+    <div class="mh"><div class="mt">Attends... 👀</div></div>
+    <div class="mb">
+      <div class="ms">Les gens qui commandent ça prennent aussi :</div>
+      <div class="ur"><div><div class="un">🍮 Tiramisu maison</div><div class="usub">Fait maison, crémeux</div></div><div class="urr"><div class="up">4€</div><button class="ua" onclick="addUpsell('tir-up','Tiramisu maison',4,this)">+ Ajouter</button></div></div>
+      <div class="ur"><div><div class="un">🧀 Burrata</div><div class="usub">Apulienne, huile d'olive</div></div><div class="urr"><div class="up">5€</div><button class="ua" onclick="addUpsell('bur-up','Burrata',5,this)">+ Ajouter</button></div></div>
+      <div class="ur"><div><div class="un">🍋 Limonade maison</div><div class="usub">Citron pressé, menthe</div></div><div class="urr"><div class="up">3€</div><button class="ua" onclick="addUpsell('lim-up','Limonade maison',3,this)">+ Ajouter</button></div></div>
+    </div>
+    <div class="mf"><button class="mok" onclick="closeUpsell()">✅ C'est bon, commander</button><button class="msk" onclick="closeUpsell()">Non merci</button></div>
+  </div>
+</div>
+
+<!-- NOTIF -->
+<div class="notif" id="liveNotif">
+  <div class="notif-top"><div class="ndot"></div><div class="nlbl">Commande en direct</div></div>
+  <div class="nbody"><div class="nname" id="notifName">Sofia M.</div><div class="ntxt" id="notifTxt">vient de commander une <strong>La Suprême</strong></div><div class="ntime" id="notifTime">il y a 3 min</div></div>
+</div>
+
+<!-- STICKY -->
+<div class="sticky" id="stickyBar">
+  <span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--g)">Ta commande</span>
+  <span class="sticky-t">Total : <span id="stickyTot">0€</span></span>
+  <a href="#" onclick="triggerUpsell(event)" class="wa" style="width:auto;padding:11px 18px;font-size:12px">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    Commander
+  </a>
+</div>
+
+<script>
+const menuData={};
+document.querySelectorAll('.prow').forEach(r=>{if(r.dataset.id)menuData[r.dataset.id]={name:r.dataset.name,price:parseFloat(r.dataset.price)}});
+let cart={},deliveryMode='livraison',upsellShown=false;
+let orderCount=parseInt(localStorage.getItem('ls_orders')||'0');
+
+function renderFidel(){const d=document.getElementById('fidelDots');if(!d)return;d.innerHTML=Array.from({length:10},(_,i)=>`<div class="fdot ${i<orderCount?'on':''}"></div>`).join('');if(orderCount>=1)document.getElementById('recoBtn')?.classList.add('show')}
+renderFidel();
+
+const sp=localStorage.getItem('ls_phone');
+if(sp){const inp=document.getElementById('phoneInput');if(inp){inp.value=sp;inp.disabled=true}document.getElementById('regOk').style.display='block';const btn=document.querySelector('.reg-b');if(btn)btn.disabled=true}
+
+function registerPhone(){const p=document.getElementById('phoneInput').value.trim();if(p.length<10){alert('Numéro invalide');return}localStorage.setItem('ls_phone',p);document.getElementById('regOk').style.display='block';document.getElementById('phoneInput').disabled=true;document.querySelector('.reg-b').disabled=true}
+
+function recommande(){const s=localStorage.getItem('ls_last');if(!s)return;cart=JSON.parse(s);document.querySelectorAll('.prow').forEach(r=>{const n=r.querySelector('.qn');if(n)n.textContent=cart[r.dataset.id]?.qty||0});updateCart();document.getElementById('p4')?.scrollIntoView({behavior:'smooth'})}
+
+function changeQty(btn,delta){const row=btn.closest('.prow');const id=row.dataset.id;const n=btn.parentElement.querySelector('.qn');let v=Math.max(0,(parseInt(n.textContent)||0)+delta);n.textContent=v;if(v===0)delete cart[id];else cart[id]={name:menuData[id].name,price:menuData[id].price,qty:v};updateCart();if(delta>0&&!upsellShown){clearTimeout(window._ut);window._ut=setTimeout(()=>{document.getElementById('upsellModal').classList.add('show');upsellShown=true},1000)}}
+
+function addExtra(el){const id=el.dataset.id,name=el.dataset.name,price=parseFloat(el.dataset.price);if(!cart[id])cart[id]={name,price,qty:0};cart[id].qty++;updateCart();el.style.background='rgba(30,140,71,.4)';setTimeout(()=>el.style.background='',600)}
+
+function addUpsell(id,name,price,btn){if(!cart[id])cart[id]={name,price,qty:0};cart[id].qty++;updateCart();btn.textContent='OK';btn.style.background='#25D366';btn.disabled=true}
+
+function selectDelivery(el,mode){document.querySelectorAll('.dopt').forEach(o=>o.classList.remove('active'));el.classList.add('active');deliveryMode=mode}
+
+function triggerUpsell(e){e.preventDefault();if(!Object.values(cart).some(i=>i.qty>0)){alert('Choisis au moins une pizza !');return}sendWhatsApp()}
+
+function closeUpsell(){document.getElementById('upsellModal').classList.remove('show')}
+
+function sendWhatsApp(){const items=Object.values(cart).filter(i=>i.qty>0);if(!items.length)return;const ml={livraison:'Livraison',surplace:'Sur place',emporter:'À emporter'}[deliveryMode];const ph=localStorage.getItem('ls_phone')||'';const lines=items.map(i=>`- ${i.qty}x ${i.name} ${(i.price*i.qty).toFixed(0)}EUR`).join('\n');const total=items.reduce((s,i)=>s+i.price*i.qty,0);const phLine=ph?`\nFidelite: ${ph}`:'';const msg=`Yo je veux commander 🍕\n\n${lines}\n\nTotal: ${total}EUR\nMode: ${ml}${phLine}\n\nMerci!`;localStorage.setItem('ls_last',JSON.stringify(cart));orderCount++;localStorage.setItem('ls_orders',orderCount.toString());renderFidel();window.open('https://wa.me/33600000000?text='+encodeURIComponent(msg),'_blank');setTimeout(()=>showReview(),3000)}
+
+function showReview(){document.getElementById('notifName').textContent='Merci !';document.getElementById('notifTxt').innerHTML='Un avis Google nous aide vraiment 🙏 <a href="#" style="color:var(--vv)">Laisser un avis</a>';document.getElementById('notifTime').textContent='30 secondes';const el=document.getElementById('liveNotif');el.classList.add('show');setTimeout(()=>el.classList.remove('show'),8000)}
+
+function updateCart(){const items=Object.values(cart).filter(i=>i.qty>0);const total=items.reduce((s,i)=>s+i.price*i.qty,0);const count=items.reduce((s,i)=>s+i.qty,0);const el=document.getElementById('cartItems');el.innerHTML=items.length?items.map(i=>`<div class="citem"><div><div class="cin">${i.name}</div><div class="ciq">x${i.qty}</div></div><div class="cip">${(i.price*i.qty).toFixed(0)}EUR</div></div>`).join(''):'<div class="cempty">Choisis tes pizzas &uarr;</div>';document.getElementById('cartTotal').textContent=total+'EUR';document.getElementById('cartCount').textContent=count;document.getElementById('stickyTot').textContent=total+'EUR';count>0?document.getElementById('stickyBar').classList.add('show'):document.getElementById('stickyBar').classList.remove('show')}
+
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('dark',window.scrollY>80));
+
+const notifs=[{n:'Sofia M.',t:'vient de commander une <strong>La Suprême</strong>',time:'il y a 2 min'},{n:'Rachid B.',t:'vient de commander une <strong>La Diavola</strong>',time:'il y a 5 min'},{n:'Ines K.',t:'vient de commander une <strong>La 4 Fromages</strong>',time:'il y a 8 min'},{n:'Karim T.',t:'vient de commander <strong>2x La Margherita</strong>',time:'il y a 11 min'},{n:'Amira L.',t:'vient de commander <strong>Le Calzone</strong>',time:'il y a 14 min'}];
+let ni=0;
+function showNotif(){const n=notifs[ni%notifs.length];document.getElementById('notifName').textContent=n.n;document.getElementById('notifTxt').innerHTML=n.t;document.getElementById('notifTime').textContent=n.time;const el=document.getElementById('liveNotif');el.classList.add('show');setTimeout(()=>el.classList.remove('show'),5000);ni++}
+setTimeout(()=>{showNotif();setInterval(showNotif,10000)},4000);
+
+document.getElementById('upsellModal').addEventListener('click',e=>{if(e.target===document.getElementById('upsellModal'))closeUpsell()});
+
+const hv=document.getElementById('heroVideo');
+if(hv){hv.muted=true;hv.setAttribute('playsinline','');hv.addEventListener('ended',()=>{hv.currentTime=0;hv.pause()});const tp=()=>hv.play().catch(()=>{});tp();setTimeout(tp,500);setTimeout(tp,1500);['touchstart','click'].forEach(e=>document.addEventListener(e,()=>tp(),{once:true}))}
+</script>
+</body>
+</html>
