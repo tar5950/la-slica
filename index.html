@@ -6,517 +6,897 @@
 <title>La Slica — Pizza Street</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,300;0,400;0,700;0,900;1,900&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&family=Nunito+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--n:#080808;--v:#1e8c47;--vv:#33e06b;--w:#f4efe6;--g:#666;}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-snap-type:y mandatory;overflow-y:scroll}
-body{background:var(--n);color:var(--w);font-family:'Barlow',sans-serif}
 
-/* NAV */
-#nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 5%;display:flex;align-items:center;justify-content:space-between;transition:background .3s}
-#nav.dark{background:rgba(8,8,8,.96);border-bottom:1px solid rgba(255,255,255,.06)}
-.logo{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:.12em;color:var(--w);text-decoration:none;display:flex;align-items:center;gap:10px}
-.logo-pip{width:8px;height:8px;background:var(--vv);border-radius:50%}
-.nav-r{display:flex;align-items:center;gap:20px}
-.nav-l{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(244,239,230,.45);text-decoration:none;transition:color .2s}
-.nav-l:hover{color:var(--vv)}
-.nav-o{background:var(--v);color:var(--w);padding:9px 20px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:900;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;border:2px solid var(--v);transition:all .2s}
-.nav-o:hover{background:transparent;color:var(--vv);border-color:var(--vv)}
+:root {
+  --v:    #1e8c47;
+  --vv:   #27c45f;
+  --vl:   #e8f7ee;
+  --vl2:  #d0f0dc;
+  --vd:   #155e30;
+  --w:    #ffffff;
+  --bg:   #f4fef7;
+  --bg2:  #eaf9f0;
+  --n:    #1a2e22;
+  --txt:  #3d5c48;
+  --mid:  #7a9e87;
+  --border: rgba(30,140,71,0.15);
+  --shadow: 0 8px 32px rgba(30,140,71,0.12);
+  --shadow2: 0 4px 16px rgba(0,0,0,0.06);
+}
 
-/* PANELS */
-.snap{height:100vh;min-height:560px;scroll-snap-align:start;position:relative;overflow:hidden}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { background:var(--bg); color:var(--n); font-family:'Nunito Sans',sans-serif; overflow-x:hidden; }
 
-/* HERO */
-#p1{display:flex;align-items:flex-end}
-.vid-wrap{position:absolute;inset:0}
-.vid-wrap video{width:100%;height:100%;object-fit:cover}
-.vid-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,1) 0%,rgba(8,8,8,.55) 30%,rgba(8,8,8,.1) 65%,transparent 100%)}
-.hero-copy{position:relative;z-index:10;padding:0 5% 56px;width:100%}
-.hk{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.4em;text-transform:uppercase;color:var(--vv);margin-bottom:12px;opacity:0;animation:fu .7s .3s ease forwards}
-.hh{font-family:'Bebas Neue',sans-serif;font-size:clamp(80px,16vw,220px);line-height:.82;letter-spacing:.02em;color:var(--w);margin-bottom:20px;opacity:0;animation:fu .8s .5s ease forwards}
-.hh .outline{color:transparent;-webkit-text-stroke:2px var(--vv);display:block}
-.hh .solid{color:var(--vv);display:block}
-.hbot{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;opacity:0;animation:fu .7s .9s ease forwards}
-.htag{font-size:14px;color:rgba(244,239,230,.5);line-height:1.7;max-width:300px;font-weight:300}
-.hcta{display:flex;gap:12px;flex-wrap:wrap}
-.btn-v{display:inline-flex;align-items:center;gap:8px;background:var(--v);color:var(--w);padding:14px 28px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;border:2px solid var(--v);cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
-.btn-v::after{content:'';position:absolute;inset:0;background:var(--vv);transform:translateX(-101%);transition:transform .25s;z-index:0}
-.btn-v:hover::after{transform:translateX(0)}
-.btn-v:hover{color:var(--n);border-color:var(--vv)}
-.btn-v span{position:relative;z-index:1}
-.btn-g{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--w);padding:14px 24px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border:2px solid rgba(244,239,230,.2);cursor:pointer;transition:border-color .2s}
-.btn-g:hover{border-color:var(--w)}
-.scroll-hint{position:absolute;bottom:28px;right:5%;display:flex;flex-direction:column;align-items:center;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(244,239,230,.3);z-index:10;opacity:0;animation:fu .7s 1.4s ease forwards}
-.sh-line{width:1px;height:48px;background:linear-gradient(to bottom,transparent,rgba(244,239,230,.3));animation:pulse-l 2s infinite}
-@keyframes pulse-l{0%,100%{opacity:1}50%{opacity:.3}}
-@keyframes fu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+/* ── NAV ── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  padding:0 5%; height:70px;
+  display:flex; align-items:center; justify-content:space-between;
+  transition:all 0.3s;
+}
+nav.scrolled {
+  background:rgba(255,255,255,0.97);
+  box-shadow:0 2px 20px rgba(30,140,71,0.1);
+  backdrop-filter:blur(12px);
+  height:60px;
+}
+.logo {
+  font-family:'Nunito',sans-serif;
+  font-size:24px; font-weight:900;
+  color:var(--w); text-decoration:none;
+  display:flex; align-items:center; gap:10px;
+}
+nav.scrolled .logo { color:var(--n); }
+.logo-icon {
+  width:36px; height:36px; background:var(--v);
+  border-radius:50%; display:flex; align-items:center;
+  justify-content:center; font-size:18px; flex-shrink:0;
+  box-shadow:0 4px 12px rgba(30,140,71,0.3);
+}
+.logo span { color:var(--vv); }
+nav.scrolled .logo span { color:var(--v); }
+.nav-links { display:flex; gap:28px; align-items:center; }
+.nav-links a {
+  font-size:13px; font-weight:600;
+  color:rgba(255,255,255,0.55); text-decoration:none; transition:color 0.2s;
+}
+nav.scrolled .nav-links a { color:rgba(26,46,34,0.45); }
+.nav-links a:hover { color:var(--vv); }
+nav.scrolled .nav-links a:hover { color:var(--v); }
+.nav-cta {
+  font-size:13px; font-weight:800;
+  color:var(--w); background:var(--v);
+  padding:10px 24px; text-decoration:none;
+  border-radius:50px; border:none; transition:all 0.2s;
+  box-shadow:0 4px 16px rgba(30,140,71,0.3);
+}
+.nav-cta:hover { background:var(--vv); transform:translateY(-1px); }
 
-/* PANEL 2 — GREEN STATEMENT */
-#p2{background:var(--v);display:flex;flex-direction:column;justify-content:center;scroll-snap-align:start}
-.tkr{overflow:hidden;padding:14px 0;border-top:2px solid rgba(8,8,8,.2);border-bottom:2px solid rgba(8,8,8,.2);background:rgba(8,8,8,.15);position:absolute;left:0;right:0}
-.tkr.top{top:0}
-.tkr.bot{bottom:0}
-.ttrack{display:flex;white-space:nowrap;animation:troll 14s linear infinite}
-.ttrack.rev{animation-direction:reverse}
-@keyframes troll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.ti{display:inline-flex;align-items:center;gap:16px;padding:0 28px;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.1em;color:var(--w)}
-.ti-s{color:rgba(255,255,255,.35);font-size:22px}
-.stmt{padding:0 5%;position:relative;z-index:1}
-.stmt-eye{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.35em;text-transform:uppercase;color:rgba(244,239,230,.6);margin-bottom:16px}
-.stmt-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,10vw,140px);line-height:.88;letter-spacing:.02em;color:var(--w);margin-bottom:28px}
-.stmt-h em{font-style:italic;color:var(--n);font-family:'Barlow Condensed',sans-serif;font-weight:900;display:block;font-size:clamp(44px,8vw,110px)}
-.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;max-width:760px}
-.pb{background:rgba(8,8,8,.2);padding:18px;border-top:3px solid rgba(244,239,230,.2)}
-.pb-i{font-size:22px;margin-bottom:8px}
-.pb-t{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--w);margin-bottom:3px}
-.pb-d{font-size:11px;color:rgba(244,239,230,.6);line-height:1.5}
+/* ── HERO ── */
+#hero {
+  position:relative; height:100vh; min-height:620px;
+  display:flex; align-items:flex-end; overflow:hidden;
+  background:var(--vd);
+}
+.hc1 {
+  position:absolute; border-radius:50%; pointer-events:none; z-index:1;
+  width:700px; height:700px;
+  background:radial-gradient(circle, rgba(39,196,95,0.15) 0%, transparent 70%);
+  top:-200px; right:-100px;
+}
+.hc2 {
+  position:absolute; border-radius:50%; pointer-events:none; z-index:1;
+  width:350px; height:350px;
+  background:radial-gradient(circle, rgba(30,140,71,0.1) 0%, transparent 70%);
+  bottom:-80px; left:-60px;
+}
+.hero-vid { position:absolute; inset:0; z-index:0; }
+.hero-vid video { width:100%; height:100%; object-fit:cover; }
 
-/* PANEL 3 — MENU */
-#p3{display:flex;flex-direction:column;background:var(--n);scroll-snap-align:start}
-.menu-hdr{padding:88px 5% 24px;display:flex;align-items:flex-end;justify-content:space-between;border-bottom:1px solid rgba(244,239,230,.07);flex-shrink:0;flex-wrap:wrap;gap:16px}
-.menu-ttl{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,7vw,88px);line-height:.88;letter-spacing:.03em;color:var(--w)}
-.menu-ttl span{color:var(--vv)}
-.menu-body{flex:1;overflow-y:auto;padding:0 5% 16px;scrollbar-width:thin;scrollbar-color:var(--v) transparent}
-.menu-body::-webkit-scrollbar{width:3px}
-.menu-body::-webkit-scrollbar-thumb{background:var(--v)}
-.plist{padding-top:16px}
-.prow{display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px;padding:18px 0;border-bottom:1px solid rgba(244,239,230,.05);cursor:pointer;position:relative}
-.prow::before{content:'';position:absolute;left:-5%;right:-5%;top:0;bottom:0;background:rgba(30,140,71,.05);opacity:0;transition:opacity .2s}
-.prow:hover::before{opacity:1}
-.prow-l{display:flex;align-items:center;gap:16px}
-.pnum{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.1em;color:var(--vv);opacity:.5;width:26px;flex-shrink:0}
-.pthumb{width:60px;height:60px;overflow:hidden;flex-shrink:0}
-.pthumb img{width:100%;height:100%;object-fit:cover;filter:brightness(.8)}
-.pname{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:19px;letter-spacing:.06em;text-transform:uppercase;color:var(--w);margin-bottom:3px}
-.pbdg{font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:var(--v);color:var(--w);padding:2px 7px;margin-left:7px;vertical-align:middle}
-.pdesc{font-size:12px;color:var(--g);line-height:1.4}
-.prow-r{display:flex;align-items:center;gap:14px}
-.pprice{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--vv);line-height:1}
-.pprice .old{font-family:'Barlow Condensed',sans-serif;font-size:13px;color:var(--g);text-decoration:line-through;margin-left:4px}
-.qty{display:flex;align-items:center;border:1px solid rgba(30,140,71,.4)}
-.qb{width:27px;height:27px;background:transparent;border:none;color:var(--w);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
-.qb:hover{background:var(--v)}
-.qn{width:27px;text-align:center;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:var(--w);background:transparent;border:none;pointer-events:none}
-.xbar{display:flex;gap:2px;padding:14px 5%;background:rgba(30,140,71,.06);border-top:1px solid rgba(30,140,71,.14);flex-shrink:0;overflow-x:auto}
-.xpill{display:flex;align-items:center;gap:8px;background:rgba(30,140,71,.1);border:1px solid rgba(30,140,71,.22);padding:8px 14px;cursor:pointer;white-space:nowrap;transition:background .2s;flex-shrink:0}
-.xpill:hover{background:rgba(30,140,71,.25)}
-.xpill-n{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--w)}
-.xpill-p{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--vv)}
+.hero-copy { position:relative; z-index:5; padding:0 5% 80px; width:100%; }
 
-/* PANEL 4 — COMMANDER */
-#p4{display:grid;grid-template-columns:1fr 1fr;scroll-snap-align:start}
-.cmd-l{background:var(--v);padding:88px 6% 48px;display:flex;flex-direction:column;justify-content:center;overflow-y:auto}
-.cmd-ttl{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,6vw,80px);line-height:.88;letter-spacing:.03em;color:var(--w);margin-bottom:36px}
-.steps{display:flex;flex-direction:column}
-.step{display:flex;gap:14px;padding:18px 0;border-bottom:1px solid rgba(244,239,230,.15)}
-.step:last-child{border:none}
-.sn{font-family:'Bebas Neue',sans-serif;font-size:42px;color:rgba(244,239,230,.25);line-height:1;flex-shrink:0;width:44px}
-.st{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--w);margin-bottom:4px}
-.sd{font-size:13px;color:rgba(244,239,230,.55);line-height:1.6}
-.dopts{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
-.dopt{flex:1;min-width:70px;border:2px solid rgba(244,239,230,.14);padding:10px 6px;text-align:center;cursor:pointer;transition:all .2s}
-.dopt:hover,.dopt.active{border-color:var(--n);background:rgba(8,8,8,.2)}
-.dopt-i{font-size:17px;margin-bottom:4px}
-.dopt-n{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--w)}
-.cmd-r{background:rgba(8,8,8,.98);padding:88px 5% 32px;display:flex;flex-direction:column;overflow-y:auto}
-.reg{background:rgba(30,140,71,.08);border-left:3px solid var(--vv);padding:12px 14px;margin-bottom:12px}
-.reg-l{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--vv);margin-bottom:8px}
-.reg-r{display:flex;gap:6px}
-.reg-i{flex:1;background:rgba(244,239,230,.05);border:1px solid rgba(30,140,71,.25);color:var(--w);padding:8px 12px;font-family:'Barlow',sans-serif;font-size:13px;outline:none}
-.reg-i:focus{border-color:var(--vv)}
-.reg-b{background:var(--v);color:var(--w);border:none;padding:8px 14px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:background .2s}
-.reg-b:hover{background:var(--vv);color:var(--n)}
-.reg-ok{font-size:11px;color:#25D366;margin-top:6px;display:none}
-.fidel{display:flex;align-items:center;gap:12px;background:rgba(244,239,230,.03);border-left:3px solid var(--vv);padding:12px 14px;margin-bottom:12px}
-.ft{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--vv);margin-bottom:3px}
-.fd{font-size:11px;color:var(--g)}
-.fdots{display:flex;gap:3px;margin-top:5px}
-.fdot{width:10px;height:10px;border-radius:50%;border:1px solid rgba(30,140,71,.3)}
-.fdot.on{background:var(--vv);border-color:var(--vv)}
-.reco{width:100%;background:transparent;border:1px solid rgba(30,140,71,.2);color:var(--g);padding:8px;font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s;margin-bottom:10px;display:none}
-.reco.show{display:block}
-.reco:hover{border-color:var(--v);color:var(--w)}
-.cart-ttl-row{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.08em;color:var(--w);margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid rgba(244,239,230,.07)}
-.cbdg{background:var(--v);color:var(--w);font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;padding:2px 10px;letter-spacing:.08em}
-.citems{flex:1;min-height:56px;margin-bottom:14px;overflow-y:auto}
-.cempty{text-align:center;padding:20px 0;color:var(--g);font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;border:1px dashed rgba(30,140,71,.2)}
-.citem{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid rgba(244,239,230,.04)}
-.cin{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--w)}
-.ciq{font-size:10px;color:var(--g);margin-top:2px}
-.cip{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--vv)}
-.ctot{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-top:2px solid var(--v);margin-bottom:12px}
-.ctl{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--g)}
-.ctv{font-family:'Bebas Neue',sans-serif;font-size:34px;color:var(--w)}
-.wa{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:15px;background:#25D366;color:var(--w);font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;transition:background .2s}
-.wa:hover{background:#1da855}
-.cnote{text-align:center;font-size:10px;color:var(--g);margin-top:8px;font-family:'Barlow Condensed',sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.hero-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--v); padding:7px 16px; margin-bottom:20px;
+  font-size:11px; font-weight:700; letter-spacing:0.2em;
+  text-transform:uppercase; color:var(--w);
+  border-radius:50px;
+  box-shadow:0 4px 16px rgba(30,140,71,0.3);
+  opacity:0; animation:fadeUp 0.6s 0.3s forwards;
+}
+.hero-badge::before { content:'●'; font-size:7px; animation:breathe 2s infinite; }
 
-/* PANEL 5 — AVIS */
-#p5{background:var(--w);display:flex;flex-direction:column;justify-content:center;padding:88px 5% 60px;color:var(--n);scroll-snap-align:start;overflow:hidden}
-.avis-hdr{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:44px;flex-wrap:wrap;gap:16px}
-.avis-ttl{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,9vw,120px);line-height:.88;letter-spacing:.02em;color:var(--n)}
-.avis-ttl span{color:var(--v)}
-.avis-score{display:flex;align-items:center;gap:16px}
-.avis-num{font-family:'Bebas Neue',sans-serif;font-size:72px;color:var(--n);line-height:1}
-.avis-stars{color:var(--v);font-size:18px;letter-spacing:2px;margin-bottom:4px}
-.avis-cnt{font-size:11px;color:var(--g);font-family:'Barlow Condensed',sans-serif;letter-spacing:.1em}
-.revcols{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
-.revcol{background:rgba(8,8,8,.04);padding:24px;border-top:3px solid transparent;transition:border-color .2s}
-.revcol:nth-child(2){background:var(--v);color:var(--w)}
-.revcol:hover{border-color:var(--v)}
-.revcol:nth-child(2):hover{border-color:var(--n)}
-.rev-st{font-size:13px;letter-spacing:2px;color:var(--v);margin-bottom:12px}
-.revcol:nth-child(2) .rev-st{color:var(--w)}
-.rev-q{font-size:13px;line-height:1.7;font-style:italic;margin-bottom:14px}
-.rev-a{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.5}
+.hero-title {
+  font-family:'Nunito',sans-serif; font-weight:900;
+  font-size:clamp(56px,12vw,170px); line-height:0.86;
+  margin-bottom:20px;
+  opacity:0; animation:fadeUp 0.8s 0.5s forwards;
+}
+.hero-title .l1 { color:var(--w); display:block; }
+.hero-title .l2 { color:var(--vv); display:block; }
+.hero-title .l3 { color:rgba(255,255,255,0.2); display:block; font-size:0.55em; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; }
 
-/* PANEL 6 — FOOTER */
-#p6{background:var(--n);display:flex;flex-direction:column;justify-content:space-between;padding:88px 5% 36px;overflow:hidden;position:relative;scroll-snap-align:start}
-.ft-bgw{position:absolute;bottom:-60px;left:-3%;font-family:'Bebas Neue',sans-serif;font-size:clamp(120px,25vw,320px);color:rgba(30,140,71,.04);letter-spacing:.04em;pointer-events:none;user-select:none;line-height:1}
-.ft-logo{font-family:'Bebas Neue',sans-serif;font-size:clamp(60px,12vw,160px);line-height:.88;letter-spacing:.04em;color:var(--w);text-decoration:none;display:block;margin-bottom:6px}
-.ft-sub{font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:.25em;text-transform:uppercase;color:var(--vv);margin-bottom:36px}
-.ft-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:36px;position:relative;z-index:1}
-.ftl{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--vv);margin-bottom:12px}
-.fti{font-size:13px;color:rgba(244,239,230,.45);line-height:1.8}
-.fti strong{color:var(--w);font-weight:400}
-.ft-btm{display:flex;justify-content:space-between;padding-top:24px;border-top:1px solid rgba(244,239,230,.06);position:relative;z-index:1;flex-wrap:wrap;gap:10px}
-.ft-copy{font-size:10px;color:rgba(244,239,230,.18);font-family:'Barlow Condensed',sans-serif;letter-spacing:.1em;text-transform:uppercase}
+.hero-sub {
+  font-size:14px; font-weight:400; color:rgba(255,255,255,0.5);
+  line-height:1.7; max-width:420px; margin-bottom:36px;
+  opacity:0; animation:fadeUp 0.6s 0.9s forwards;
+}
 
-/* UPSELL */
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s;backdrop-filter:blur(4px)}
-.modal-bg.show{opacity:1;pointer-events:all}
-.modal-box{background:#111;border:2px solid var(--v);border-top:4px solid var(--vv);max-width:420px;width:90%;transform:scale(.95);transition:transform .25s}
-.modal-bg.show .modal-box{transform:scale(1)}
-.mh{background:var(--v);padding:14px 18px}
-.mt{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.1em;color:var(--w)}
-.mb{padding:18px}
-.ms{font-size:12px;color:var(--g);margin-bottom:14px;font-family:'Barlow Condensed',sans-serif;letter-spacing:.08em;text-transform:uppercase}
-.ur{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid rgba(244,239,230,.05);gap:8px}
-.un{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--w)}
-.usub{font-size:10px;color:var(--g);margin-top:2px}
-.urr{display:flex;align-items:center;gap:10px;flex-shrink:0}
-.up{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--vv)}
-.ua{background:var(--v);color:var(--w);border:none;padding:6px 12px;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:background .2s;white-space:nowrap}
-.ua:hover{background:var(--vv);color:var(--n)}
-.mf{padding:0 18px 18px;display:flex;flex-direction:column;gap:8px}
-.mok{width:100%;padding:13px;background:var(--v);color:var(--w);border:none;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;transition:background .2s}
-.mok:hover{background:var(--vv);color:var(--n)}
-.msk{width:100%;padding:11px;background:transparent;border:1px solid rgba(244,239,230,.1);color:var(--g);cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;transition:all .2s}
-.msk:hover{border-color:var(--w);color:var(--w)}
+.hero-btns { display:flex; gap:14px; flex-wrap:wrap; opacity:0; animation:fadeUp 0.6s 1.1s forwards; }
 
-/* NOTIF */
-.notif{position:fixed;bottom:24px;left:24px;background:#111;border:2px solid var(--v);border-left:5px solid var(--vv);max-width:290px;width:calc(100% - 48px);z-index:200;transform:translateX(-120%);transition:transform .5s cubic-bezier(.34,1.56,.64,1);pointer-events:none;box-shadow:0 8px 24px rgba(0,0,0,.6)}
-.notif.show{transform:translateX(0)}
-.notif-top{background:rgba(30,140,71,.15);padding:7px 14px;display:flex;align-items:center;gap:8px}
-.ndot{width:7px;height:7px;background:#25D366;border-radius:50%;animation:pulse 1.5s infinite;flex-shrink:0}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.nlbl{font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(51,224,107,.8)}
-.nbody{padding:12px 14px}
-.nname{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:.06em;color:var(--w);margin-bottom:3px}
-.ntxt{font-size:12px;color:rgba(244,239,230,.6);line-height:1.4}
-.ntxt strong{color:var(--vv)}
-.ntime{font-size:10px;color:var(--g);margin-top:6px;font-family:'Barlow Condensed',sans-serif}
+.btn-main {
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--v); color:var(--w);
+  padding:15px 32px; font-family:'Nunito',sans-serif;
+  font-size:14px; font-weight:800;
+  text-decoration:none; border:none; cursor:pointer;
+  border-radius:50px; transition:all 0.22s;
+  box-shadow:0 6px 24px rgba(30,140,71,0.4);
+}
+.btn-main:hover { background:var(--vv); transform:translateY(-2px); box-shadow:0 10px 32px rgba(30,140,71,0.5); }
 
-/* STICKY */
-.sticky{position:fixed;bottom:0;left:0;right:0;background:rgba(8,8,8,.97);border-top:3px solid var(--v);padding:11px 5%;display:flex;align-items:center;justify-content:space-between;gap:12px;z-index:80;transform:translateY(100%);transition:transform .3s;backdrop-filter:blur(8px)}
-.sticky.show{transform:translateY(0)}
-.sticky-t{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--w)}
-.sticky-t span{color:var(--vv)}
+.btn-outline {
+  display:inline-flex; align-items:center; gap:8px;
+  background:rgba(255,255,255,0.1); color:var(--w);
+  padding:15px 28px; font-family:'Nunito',sans-serif;
+  font-size:14px; font-weight:700;
+  text-decoration:none; border:2px solid rgba(255,255,255,0.25);
+  border-radius:50px; cursor:pointer; transition:all 0.22s;
+}
+.btn-outline:hover { border-color:var(--vv); color:var(--vv); background:rgba(39,196,95,0.1); }
+
+.hero-stats { position:absolute; bottom:48px; right:5%; z-index:5; display:flex; gap:32px; opacity:0; animation:fadeUp 0.6s 1.4s forwards; }
+.hstat { text-align:center; background:rgba(255,255,255,0.1); padding:14px 20px; border-radius:16px; backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.1); }
+.hstat-v { font-family:'Nunito',sans-serif; font-size:24px; font-weight:900; color:var(--vv); line-height:1; }
+.hstat-l { font-size:9px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-top:3px; }
+
+.scroll-hint { position:absolute; bottom:28px; left:5%; z-index:5; display:flex; flex-direction:column; align-items:center; gap:7px; font-size:9px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.2); opacity:0; animation:fadeUp 0.6s 1.7s forwards; }
+.scroll-line { width:1px; height:40px; background:linear-gradient(to bottom,transparent,var(--vv)); opacity:0.4; animation:breathe 2.5s infinite; }
+
+@keyframes breathe { 0%,100%{opacity:0.4} 50%{opacity:0.1} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+/* ── TICKER ── */
+.ticker { background:var(--v); padding:12px 0; overflow:hidden; }
+.ticker-track { display:flex; white-space:nowrap; animation:tick 18s linear infinite; }
+@keyframes tick { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.tick-item { display:inline-flex; align-items:center; gap:12px; padding:0 20px; font-size:12px; font-weight:800; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.85); }
+.tick-dot { width:6px; height:6px; background:rgba(255,255,255,0.4); border-radius:50%; flex-shrink:0; }
+
+/* ── SECTIONS ── */
+.section { padding:90px 5%; }
+.sec-label {
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--vl); color:var(--v); padding:5px 14px;
+  border-radius:50px; font-size:10px; font-weight:800;
+  letter-spacing:0.18em; text-transform:uppercase; margin-bottom:14px;
+}
+.sec-title {
+  font-family:'Nunito',sans-serif; font-weight:900;
+  font-size:clamp(36px,5.5vw,68px); line-height:1; color:var(--n); margin-bottom:6px;
+}
+.sec-title span { color:var(--v); }
+
+/* ── PIZZAS ── */
+#pizzas { background:var(--w); }
+.pizzas-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:48px; flex-wrap:wrap; gap:16px; }
+.pizzas-sub { font-size:14px; font-weight:400; line-height:1.7; color:var(--mid); max-width:380px; }
+
+/* Carousel horizontal style app */
+.pizzas-carousel { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+
+.pizza-card {
+  background:var(--w); border-radius:24px;
+  box-shadow:var(--shadow2); overflow:visible;
+  cursor:pointer; transition:all 0.3s; position:relative;
+  border:1px solid var(--bg2);
+  padding-top:60px; /* espace pour la pizza flottante */
+}
+.pizza-card:hover { transform:translateY(-8px); box-shadow:var(--shadow); }
+
+/* Pizza ronde flottante */
+.pizza-float {
+  position:absolute; top:-50px; left:50%;
+  transform:translateX(-50%);
+  width:120px; height:120px; border-radius:50%;
+  overflow:hidden; border:4px solid var(--w);
+  box-shadow:0 8px 24px rgba(30,140,71,0.2);
+  transition:transform 0.3s;
+}
+.pizza-card:hover .pizza-float { transform:translateX(-50%) translateY(-6px) rotate(5deg); }
+.pizza-float img { width:100%; height:100%; object-fit:cover; }
+
+.pizza-card-body { padding:14px 20px 22px; text-align:center; }
+
+.pizza-tag {
+  display:inline-block; background:var(--vl); color:var(--v);
+  font-size:9px; font-weight:800; letter-spacing:0.15em;
+  text-transform:uppercase; padding:3px 10px; border-radius:50px; margin-bottom:10px;
+}
+.pizza-name { font-family:'Nunito',sans-serif; font-size:18px; font-weight:900; color:var(--n); margin-bottom:6px; }
+.pizza-desc { font-size:11px; font-weight:400; line-height:1.6; color:var(--mid); margin-bottom:14px; }
+.pizza-footer { display:flex; justify-content:space-between; align-items:center; padding-top:12px; border-top:1px solid var(--bg2); }
+.pizza-price { font-family:'Nunito',sans-serif; font-size:22px; font-weight:900; color:var(--v); }
+.pizza-time { font-size:10px; font-weight:600; color:var(--mid); }
+.pizza-btn {
+  display:block; width:100%; margin-top:12px;
+  background:var(--vl); border:none; color:var(--v); padding:10px;
+  font-family:'Nunito',sans-serif; font-size:12px; font-weight:800;
+  cursor:pointer; border-radius:12px;
+  opacity:0; transform:translateY(6px); transition:all 0.22s;
+}
+.pizza-card:hover .pizza-btn { opacity:1; transform:translateY(0); }
+.pizza-btn:hover { background:var(--v); color:var(--w); }
+
+/* ── HOW IT WORKS ── */
+#howto { background:var(--bg); }
+.howto-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-top:48px; }
+.step-card {
+  background:var(--w); padding:32px 22px;
+  border-radius:24px; text-align:center;
+  box-shadow:var(--shadow2); transition:all 0.25s;
+  border:1px solid var(--bg2); position:relative; overflow:hidden;
+}
+.step-card:hover { transform:translateY(-4px); box-shadow:var(--shadow); }
+.step-card::before {
+  content:''; position:absolute; top:0; left:0; right:0;
+  height:4px; background:var(--v); transform:scaleX(0);
+  transition:transform 0.3s; border-radius:0;
+}
+.step-card:hover::before { transform:scaleX(1); }
+.step-icon-wrap {
+  width:60px; height:60px; background:var(--vl);
+  border-radius:50%; display:flex; align-items:center;
+  justify-content:center; font-size:26px; margin:0 auto 16px;
+}
+.step-num-badge {
+  position:absolute; top:16px; right:16px;
+  font-family:'Nunito',sans-serif; font-size:11px; font-weight:900;
+  color:var(--v); background:var(--vl); width:24px; height:24px;
+  border-radius:50%; display:flex; align-items:center; justify-content:center;
+}
+.step-name { font-family:'Nunito',sans-serif; font-size:15px; font-weight:800; color:var(--n); margin-bottom:8px; }
+.step-desc { font-size:12px; font-weight:400; line-height:1.7; color:var(--mid); }
+
+/* ── CONCEPT / À PROPOS ── */
+#concept {
+  background:var(--w);
+  display:grid; grid-template-columns:1fr 1fr;
+  min-height:540px;
+}
+.concept-img { position:relative; overflow:hidden; border-radius:0; }
+.concept-img img { width:100%; height:100%; object-fit:cover; transition:transform 0.5s; }
+.concept-img:hover img { transform:scale(1.04); }
+.concept-img::after {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(to right, transparent 60%, var(--w) 100%);
+}
+.concept-content { padding:72px 5% 72px 4%; display:flex; flex-direction:column; justify-content:center; }
+.concept-text { font-size:14px; font-weight:400; line-height:1.9; color:var(--txt); margin-bottom:40px; }
+.concept-stats { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
+.cstat {
+  background:var(--bg); border-radius:16px; padding:16px;
+  border:1px solid var(--bg2); text-align:center; transition:all 0.2s;
+}
+.cstat:hover { background:var(--vl); border-color:var(--vl2); }
+.cstat-v { font-family:'Nunito',sans-serif; font-size:28px; font-weight:900; color:var(--v); line-height:1; margin-bottom:4px; }
+.cstat-l { font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--mid); }
+
+/* ── COMMANDE ── */
+#commande { background:var(--bg); }
+.commande-layout { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start; margin-top:48px; }
+
+.info-item { display:flex; align-items:flex-start; gap:14px; padding:16px 0; border-bottom:1px solid var(--bg2); }
+.info-item:last-child { border:none; }
+.info-icon { width:44px; height:44px; background:var(--vl); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+.info-lbl { font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--mid); margin-bottom:4px; }
+.info-val { font-size:14px; font-weight:600; color:var(--n); line-height:1.4; }
+
+.commande-form {
+  background:var(--w); border-radius:28px;
+  padding:36px; position:sticky; top:86px;
+  box-shadow:0 16px 48px rgba(30,140,71,0.12);
+  border:1px solid var(--bg2);
+}
+.form-title {
+  font-family:'Nunito',sans-serif; font-size:20px; font-weight:900;
+  color:var(--n); text-align:center; margin-bottom:20px;
+  padding-bottom:16px; border-bottom:1px solid var(--bg2);
+}
+
+.prog { display:flex; gap:4px; margin-bottom:20px; }
+.prog-step { flex:1; height:4px; background:var(--bg2); transition:background 0.3s; border-radius:4px; }
+.prog-step.done { background:var(--v); }
+
+.step-lbl { font-size:10px; font-weight:800; letter-spacing:0.15em; text-transform:uppercase; color:var(--v); margin-bottom:10px; margin-top:18px; }
+
+.g2 { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; }
+.g4 { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; }
+
+.chip {
+  background:var(--bg); border:2px solid var(--bg2);
+  padding:10px 6px; text-align:center; cursor:pointer;
+  transition:all 0.18s; border-radius:14px;
+}
+.chip:hover, .chip.on { border-color:var(--v); background:var(--vl); }
+.chip-n { font-family:'Nunito',sans-serif; font-size:12px; font-weight:700; color:var(--n); }
+.chip.on .chip-n { color:var(--v); }
+
+.srv-chip {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:12px 14px; background:var(--bg);
+  border:2px solid var(--bg2); cursor:pointer;
+  transition:all 0.18s; border-radius:14px;
+}
+.srv-chip:hover, .srv-chip.on { border-color:var(--v); background:var(--vl); }
+.srv-chip-n { font-family:'Nunito',sans-serif; font-size:13px; font-weight:700; color:var(--n); }
+.srv-chip.on .srv-chip-n { color:var(--v); }
+.srv-chip-p { font-family:'Nunito',sans-serif; font-size:18px; font-weight:900; color:var(--v); }
+
+.cal-chip {
+  background:var(--bg); border:2px solid var(--bg2);
+  padding:8px 4px; text-align:center; cursor:pointer;
+  transition:all 0.18s; border-radius:12px;
+}
+.cal-chip:hover, .cal-chip.on { border-color:var(--v); background:var(--vl); }
+.cal-n { font-family:'Nunito',sans-serif; font-size:17px; font-weight:900; color:var(--n); line-height:1; }
+.cal-l { font-size:8px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--mid); margin-top:2px; }
+.cal-chip.on .cal-n { color:var(--v); }
+
+.hr-chip {
+  background:var(--bg); border:2px solid var(--bg2);
+  padding:8px 4px; text-align:center; cursor:pointer;
+  font-family:'Nunito',sans-serif; font-size:12px; font-weight:700;
+  color:var(--n); transition:all 0.18s; border-radius:10px;
+}
+.hr-chip:hover, .hr-chip.on { border-color:var(--v); color:var(--v); background:var(--vl); }
+.hr-chip.taken { opacity:0.25; pointer-events:none; text-decoration:line-through; }
+
+.f-inp {
+  width:100%; display:block;
+  background:var(--bg); border:2px solid var(--bg2);
+  color:var(--n); padding:12px 14px;
+  font-family:'Nunito Sans',sans-serif; font-size:13px; font-weight:400;
+  outline:none; transition:all 0.2s; margin-bottom:10px;
+  border-radius:14px;
+}
+.f-inp:focus { border-color:var(--v); background:var(--vl); }
+.f-inp::placeholder { color:var(--mid); }
+
+.recap {
+  background:var(--vl); border:1px solid var(--vl2);
+  padding:14px 16px; margin-bottom:14px; display:none; border-radius:14px;
+}
+.recap.show { display:block; }
+.recap-line { font-size:11px; font-weight:700; color:var(--v); margin-bottom:4px; }
+.recap-line span { color:var(--n); font-weight:600; }
+
+.btn-wa {
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  width:100%; padding:16px; background:var(--v); color:var(--w);
+  font-family:'Nunito',sans-serif; font-size:14px; font-weight:800;
+  border:none; cursor:pointer; transition:all 0.2s;
+  border-radius:50px; box-shadow:0 6px 20px rgba(30,140,71,0.35);
+}
+.btn-wa:hover { background:var(--vv); transform:translateY(-2px); }
+.form-note { text-align:center; font-size:10px; color:var(--mid); margin-top:10px; }
+
+/* ── AVIS ── */
+#avis { background:var(--w); }
+.avis-layout { display:grid; grid-template-columns:240px 1fr; gap:60px; align-items:start; margin-top:48px; }
+.avis-score {
+  background:var(--v); border-radius:28px; padding:32px 24px; text-align:center;
+  box-shadow:0 12px 40px rgba(30,140,71,0.3);
+}
+.avis-num { font-family:'Nunito',sans-serif; font-size:72px; font-weight:900; color:var(--w); line-height:1; }
+.avis-stars { font-size:18px; letter-spacing:3px; color:rgba(255,255,255,0.8); margin:8px 0; }
+.avis-cnt { font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.6); }
+.avis-lnk {
+  display:block; margin-top:16px; padding:11px;
+  background:rgba(255,255,255,0.15); color:var(--w);
+  font-size:11px; font-weight:700; text-decoration:none;
+  border-radius:50px; transition:background 0.2s;
+}
+.avis-lnk:hover { background:rgba(255,255,255,0.25); }
+.avis-cols { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.avis-card {
+  background:var(--bg); padding:24px; border-radius:20px;
+  border:1px solid var(--bg2); transition:all 0.2s;
+  box-shadow:var(--shadow2);
+}
+.avis-card:hover { border-color:var(--vl2); box-shadow:var(--shadow); transform:translateY(-2px); }
+.avis-st { font-size:14px; letter-spacing:2px; color:var(--v); margin-bottom:10px; }
+.avis-txt { font-size:13px; font-weight:400; font-style:italic; line-height:1.7; color:var(--txt); margin-bottom:12px; }
+.avis-author-row { display:flex; align-items:center; gap:10px; }
+.avis-avatar {
+  width:36px; height:36px; background:var(--vl);
+  border-radius:50%; display:flex; align-items:center;
+  justify-content:center; font-size:14px; font-weight:800; color:var(--v);
+  flex-shrink:0;
+}
+.avis-auth { font-size:12px; font-weight:700; color:var(--n); }
+.avis-by { font-size:10px; color:var(--v); }
+
+/* ── FOOTER ── */
+footer {
+  background:var(--vd); padding:70px 5% 30px;
+  position:relative; overflow:hidden;
+}
+.ft-bg {
+  position:absolute; bottom:-40px; left:-2%;
+  font-family:'Nunito',sans-serif; font-weight:900;
+  font-size:clamp(80px,16vw,200px);
+  color:transparent; -webkit-text-stroke:1px rgba(39,196,95,0.06);
+  pointer-events:none; user-select:none; line-height:1;
+}
+.ft-logo { font-family:'Nunito',sans-serif; font-size:clamp(44px,8vw,100px); font-weight:900; color:var(--w); line-height:0.9; margin-bottom:6px; }
+.ft-logo span { color:var(--vv); }
+.ft-sub { font-size:11px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:rgba(39,196,95,0.5); margin-bottom:36px; }
+.ft-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:34px; position:relative; z-index:1; }
+.ft-lbl { font-size:9px; font-weight:800; letter-spacing:0.22em; text-transform:uppercase; color:var(--vv); margin-bottom:14px; opacity:0.7; }
+.ft-item { font-size:13px; font-weight:400; color:rgba(255,255,255,0.3); line-height:2; }
+.ft-item strong { color:var(--w); font-weight:600; }
+.ft-bottom { display:flex; justify-content:space-between; padding-top:24px; border-top:1px solid rgba(255,255,255,0.06); position:relative; z-index:1; margin-top:36px; flex-wrap:wrap; gap:8px; }
+.ft-copy { font-size:10px; color:rgba(255,255,255,0.15); letter-spacing:0.08em; }
+
+/* ── NOTIF blanc + vert ── */
+.notif {
+  position:fixed; bottom:24px; left:24px;
+  background:var(--w); border:none;
+  max-width:280px; width:calc(100% - 48px); z-index:200;
+  transform:translateX(-130%);
+  transition:transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
+  pointer-events:none;
+  border-radius:20px;
+  box-shadow:0 16px 48px rgba(30,140,71,0.2), 0 0 0 2px var(--vl2);
+}
+.notif.show { transform:translateX(0); }
+.notif-top { background:var(--v); padding:9px 16px; display:flex; align-items:center; gap:8px; border-radius:20px 20px 0 0; }
+.ndot { width:7px; height:7px; background:var(--w); border-radius:50%; animation:breathe 2s infinite; flex-shrink:0; }
+.nlbl { font-size:9px; font-weight:800; letter-spacing:0.18em; text-transform:uppercase; color:rgba(255,255,255,0.85); }
+.nbody { padding:14px 16px; background:var(--w); border-radius:0 0 20px 20px; }
+.nname { font-family:'Nunito',sans-serif; font-size:15px; font-weight:900; color:var(--n); margin-bottom:3px; }
+.ntxt { font-size:12px; color:var(--mid); line-height:1.4; }
+.ntxt strong { color:var(--v); font-weight:700; }
+.ntime { font-size:10px; color:#bbb; margin-top:5px; }
 
 /* RESPONSIVE */
-@media(max-width:900px){
-  html{scroll-snap-type:none}
-  .snap,#p1,#p2,#p3,#p4,#p5,#p6{height:auto;min-height:100svh;scroll-snap-align:none}
-  #p4{grid-template-columns:1fr}
-  .cmd-l{padding:80px 5% 40px}
-  .cmd-r{padding:40px 5%}
-  .revcols{grid-template-columns:1fr}
-  .ft-grid{grid-template-columns:1fr 1fr}
-  .nav-r .nav-l{display:none}
-  .pillars{grid-template-columns:1fr}
-  #p3{height:auto}
+@media(max-width:1100px) {
+  .pizzas-carousel { grid-template-columns:repeat(2,1fr); }
+  .howto-grid { grid-template-columns:repeat(2,1fr); }
+  .commande-layout { grid-template-columns:1fr; gap:32px; }
+  .commande-form { position:static; }
+  .avis-layout { grid-template-columns:1fr; gap:28px; }
+  .avis-cols { grid-template-columns:1fr; }
+  #concept { grid-template-columns:1fr; }
+  .concept-img { height:360px; }
+  .ft-grid { grid-template-columns:1fr 1fr; }
+  .hero-stats { display:none; }
 }
-@media(max-width:600px){
-  nav{padding:16px 4%}
-  .logo{font-size:22px}
-  .nav-o{padding:7px 12px;font-size:11px}
-  .hh{font-size:clamp(68px,18vw,100px)}
-  .hcta{flex-direction:column}
-  .btn-v,.btn-g{width:100%;justify-content:center}
-  .hbot{flex-direction:column;align-items:flex-start}
-  #p2{padding:0}
-  .stmt{padding:0 4%}
-  .menu-hdr{padding:72px 4% 18px}
-  .menu-body{padding:0 4% 14px}
-  .xbar{padding:12px 4%}
-  #p5{padding:72px 4% 40px}
-  .ft-grid{grid-template-columns:1fr}
-  #p6{padding:72px 4% 28px}
-  .ft-btm{flex-direction:column;gap:8px;text-align:center}
-  .notif{left:10px;right:10px;max-width:none;width:auto;bottom:74px}
-  .sticky{padding:10px 4%}
-  .pthumb{width:48px;height:48px}
+@media(max-width:600px) {
+  nav { padding:0 4%; height:60px; }
+  .nav-links { display:none; }
+  .section { padding:56px 4%; }
+  .pizzas-carousel { grid-template-columns:1fr; }
+  .howto-grid { grid-template-columns:1fr; }
+  .g4 { grid-template-columns:repeat(3,1fr); }
+  .ft-grid { grid-template-columns:1fr; }
+  .notif { left:10px; right:10px; max-width:none; width:auto; }
 }
-@media(max-width:380px){.nav-o{display:none}}
+@media(max-width:380px) { .nav-cta { display:none; } }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav id="nav">
-  <a href="#p1" class="logo"><span class="logo-pip"></span>La Slica</a>
-  <div class="nav-r">
-    <a href="#p3" class="nav-l">La Carte</a>
-    <a href="#p4" class="nav-l">Commander</a>
-    <a href="#p5" class="nav-l">Avis</a>
-    <a href="https://wa.me/33600000000?text=Yo%20je%20veux%20commander%20%F0%9F%8D%95" target="_blank" class="nav-o">Commander</a>
+  <a href="#hero" class="logo">
+    <div class="logo-icon">🍕</div>
+    La <span>Slica</span>
+  </a>
+  <div class="nav-links">
+    <a href="#pizzas">Pizzas</a>
+    <a href="#howto">Comment ça marche</a>
+    <a href="#commande">Commander</a>
+    <a href="#avis">Avis</a>
   </div>
+  <a href="#commande" class="nav-cta">🍕 Commander</a>
 </nav>
 
-<!-- P1 HERO -->
-<section id="p1" class="snap">
-  <div class="vid-wrap">
-    <video id="heroVideo" autoplay muted playsinline preload="auto" webkit-playsinline>
+<!-- HERO vidéo, fond sombre, 0% overlay -->
+<section id="hero">
+  <div class="hc1"></div>
+  <div class="hc2"></div>
+  <div class="hero-vid">
+    <video id="heroVid" autoplay muted playsinline preload="auto" webkit-playsinline>
       <source src="https://res.cloudinary.com/dzh5vllay/video/upload/q_auto,w_720/v1776032318/kling_20260413_%E4%BD%9C%E5%93%81_Cinematic__1581_0_eqi5xe.mp4" type="video/mp4" media="(max-width:600px)">
       <source src="https://res.cloudinary.com/dzh5vllay/video/upload/v1776032318/kling_20260413_%E4%BD%9C%E5%93%81_Cinematic__1581_0_eqi5xe.mp4" type="video/mp4">
     </video>
   </div>
   <div class="hero-copy">
-    <div class="hk">Napoli x Street — Four à Bois — Pâte 48h</div>
-    <div class="hh">
-      <span class="outline">La</span>
-      <span class="solid">Slica</span>
-    </div>
-    <div class="hbot">
-      <p class="htag">Pâte maison fermentée 48h. Four à bois 450°. Ingrédients frais. Commandée en 30 secondes.</p>
-      <div class="hcta">
-        <a href="#p4" class="btn-v"><span>🍕 Commander maintenant</span></a>
-        <a href="tel:0600000000" class="btn-g">📞 Appeler</a>
-      </div>
+    <div class="hero-badge">🍕 Pas de surgelé. Jamais.</div>
+    <h1 class="hero-title">
+      <span class="l1">La</span>
+      <span class="l2">Slica</span>
+      <span class="l3">Pizza Street</span>
+    </h1>
+    <p class="hero-sub">Pâte fraîche pétrie à la main. Ingrédients du marché. Cuisson au feu de bois. Livrée en 30 minutes.</p>
+    <div class="hero-btns">
+      <a href="#commande" class="btn-main">🍕 Commander maintenant</a>
+      <a href="#pizzas" class="btn-outline">Voir les pizzas</a>
     </div>
   </div>
-  <div class="scroll-hint"><span>Scroll</span><div class="sh-line"></div></div>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-v">4.9★</div><div class="hstat-l">Google</div></div>
+    <div class="hstat"><div class="hstat-v">300+</div><div class="hstat-l">Avis</div></div>
+    <div class="hstat"><div class="hstat-v">7j/7</div><div class="hstat-l">11h–23h</div></div>
+  </div>
+  <div class="scroll-hint"><span>Scroll</span><div class="scroll-line"></div></div>
 </section>
 
-<!-- P2 STATEMENT -->
-<section id="p2" class="snap">
-  <div class="tkr top">
-    <div class="ttrack">
-      <span class="ti">Pâte 48h <span class="ti-s">●</span></span><span class="ti">Four à Bois 450° <span class="ti-s">●</span></span><span class="ti">100% Halal <span class="ti-s">●</span></span><span class="ti">Ingrédients Frais <span class="ti-s">●</span></span><span class="ti">Napoli × Street <span class="ti-s">●</span></span><span class="ti">Jamais Surgelé <span class="ti-s">●</span></span>
-      <span class="ti">Pâte 48h <span class="ti-s">●</span></span><span class="ti">Four à Bois 450° <span class="ti-s">●</span></span><span class="ti">100% Halal <span class="ti-s">●</span></span><span class="ti">Ingrédients Frais <span class="ti-s">●</span></span><span class="ti">Napoli × Street <span class="ti-s">●</span></span><span class="ti">Jamais Surgelé <span class="ti-s">●</span></span>
-    </div>
+<!-- TICKER vert -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="tick-item">Pâte Fraîche <span class="tick-dot"></span></span>
+    <span class="tick-item">Feu de Bois <span class="tick-dot"></span></span>
+    <span class="tick-item">Jamais Surgelé <span class="tick-dot"></span></span>
+    <span class="tick-item">Livraison 30 min <span class="tick-dot"></span></span>
+    <span class="tick-item">100% Halal <span class="tick-dot"></span></span>
+    <span class="tick-item">Fait Maison <span class="tick-dot"></span></span>
+    <span class="tick-item">Pâte Fraîche <span class="tick-dot"></span></span>
+    <span class="tick-item">Feu de Bois <span class="tick-dot"></span></span>
+    <span class="tick-item">Jamais Surgelé <span class="tick-dot"></span></span>
+    <span class="tick-item">Livraison 30 min <span class="tick-dot"></span></span>
+    <span class="tick-item">100% Halal <span class="tick-dot"></span></span>
+    <span class="tick-item">Fait Maison <span class="tick-dot"></span></span>
   </div>
-  <div class="stmt">
-    <div class="stmt-eye">Notre philosophie</div>
-    <div class="stmt-h">Pas de<br>surgelé.<br><em>Jamais.</em></div>
-    <div class="pillars">
-      <div class="pb"><div class="pb-i">🌾</div><div class="pb-t">Pâte fermentée 48h</div><div class="pb-d">Farine italienne type 00, levure naturelle.</div></div>
-      <div class="pb"><div class="pb-i">🔥</div><div class="pb-t">Four à bois 450°</div><div class="pb-d">Cuisson 90 secondes. Bords soufflés.</div></div>
-      <div class="pb"><div class="pb-i">🍅</div><div class="pb-t">San Marzano DOP</div><div class="pb-d">La base de toute bonne pizza napolitaine.</div></div>
-    </div>
-  </div>
-  <div class="tkr bot">
-    <div class="ttrack rev">
-      <span class="ti">La Margherita <span class="ti-s">●</span></span><span class="ti">La Diavola <span class="ti-s">●</span></span><span class="ti">La Suprême <span class="ti-s">●</span></span><span class="ti">Le Calzone <span class="ti-s">●</span></span><span class="ti">La 4 Fromages <span class="ti-s">●</span></span><span class="ti">La Veggie <span class="ti-s">●</span></span>
-      <span class="ti">La Margherita <span class="ti-s">●</span></span><span class="ti">La Diavola <span class="ti-s">●</span></span><span class="ti">La Suprême <span class="ti-s">●</span></span><span class="ti">Le Calzone <span class="ti-s">●</span></span><span class="ti">La 4 Fromages <span class="ti-s">●</span></span><span class="ti">La Veggie <span class="ti-s">●</span></span>
-    </div>
-  </div>
-</section>
+</div>
 
-<!-- P3 MENU -->
-<section id="p3" class="snap">
-  <div class="menu-hdr">
+<!-- PIZZAS — fond blanc, cards arrondies, pizzas flottantes -->
+<section id="pizzas" class="section">
+  <div class="pizzas-header">
     <div>
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:var(--vv);margin-bottom:8px">La Carte</div>
-      <div class="menu-ttl">Nos <span>Pizzas</span></div>
+      <div class="sec-label">🍕 Notre Carte</div>
+      <h2 class="sec-title">Nos <span>Pizzas</span></h2>
     </div>
-    <div style="display:flex;align-items:center;gap:14px">
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:var(--w);line-height:1">4.9</div>
-      <div><div style="color:var(--vv);font-size:16px;letter-spacing:2px;margin-bottom:3px">★★★★★</div><div style="font-size:11px;color:var(--g);font-family:'Barlow Condensed',sans-serif;letter-spacing:.08em">180+ avis Google</div></div>
-    </div>
+    <p class="pizzas-sub">Pâte fraîche chaque matin, ingrédients du marché, cuisson au feu de bois.</p>
   </div>
-  <div class="menu-body">
-    <div class="plist" id="menuGrid">
-      <div class="prow" data-id="margherita" data-name="La Margherita" data-price="10" data-old="14">
-        <div class="prow-l"><div class="pnum">01</div><div class="pthumb"><img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=200&q=80" alt=""></div><div><div class="pname">La Margherita <span class="pbdg">Best-seller</span></div><div class="pdesc">Sauce tomate San Marzano, mozzarella fior di latte, basilic frais.</div></div></div>
-        <div class="prow-r"><div class="pprice">10€ <span class="old">14€</span></div><div class="qty"><button class="qb" onclick="changeQty(this,-1)">−</button><span class="qn">0</span><button class="qb" onclick="changeQty(this,1)">+</button></div></div>
+  <div class="pizzas-carousel">
+
+    <div class="pizza-card" onclick="pickPizza('La Margherita','10')">
+      <div class="pizza-float">
+        <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=300&q=80&fit=crop" alt="Margherita">
       </div>
-      <div class="prow" data-id="4fromages" data-name="La 4 Fromages" data-price="13">
-        <div class="prow-l"><div class="pnum">02</div><div class="pthumb"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=200&q=80" alt=""></div><div><div class="pname">La 4 Fromages</div><div class="pdesc">Mozzarella, gorgonzola, chèvre, parmesan, miel de truffe.</div></div></div>
-        <div class="prow-r"><div class="pprice">13€</div><div class="qty"><button class="qb" onclick="changeQty(this,-1)">−</button><span class="qn">0</span><button class="qb" onclick="changeQty(this,1)">+</button></div></div>
-      </div>
-      <div class="prow" data-id="diavola" data-name="La Diavola" data-price="12">
-        <div class="prow-l"><div class="pnum">03</div><div class="pthumb"><img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=200&q=80" alt=""></div><div><div class="pname">La Diavola <span class="pbdg">🌶️ Piquante</span></div><div class="pdesc">Sauce tomate, mozzarella, salami piquant, piment calabrais.</div></div></div>
-        <div class="prow-r"><div class="pprice">12€</div><div class="qty"><button class="qb" onclick="changeQty(this,-1)">−</button><span class="qn">0</span><button class="qb" onclick="changeQty(this,1)">+</button></div></div>
-      </div>
-      <div class="prow" data-id="supreme-piz" data-name="La Suprême" data-price="14">
-        <div class="prow-l"><div class="pnum">04</div><div class="pthumb"><img src="https://images.unsplash.com/photo-1548369937-47519962c11a?w=200&q=80" alt=""></div><div><div class="pname">La Suprême <span class="pbdg">🔥 Signature</span></div><div class="pdesc">Crème, mozzarella, poulet grillé, champignons, truffes.</div></div></div>
-        <div class="prow-r"><div class="pprice">14€</div><div class="qty"><button class="qb" onclick="changeQty(this,-1)">−</button><span class="qn">0</span><button class="qb" onclick="changeQty(this,1)">+</button></div></div>
-      </div>
-      <div class="prow" data-id="veggie-piz" data-name="La Veggie" data-price="11">
-        <div class="prow-l"><div class="pnum">05</div><div class="pthumb"><img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=200&q=80" alt=""></div><div><div class="pname">La Veggie</div><div class="pdesc">Sauce pesto, mozzarella, courgettes, tomates cerises, roquette.</div></div></div>
-        <div class="prow-r"><div class="pprice">11€</div><div class="qty"><button class="qb" onclick="changeQty(this,-1)">−</button><span class="qn">0</span><button class="qb" onclick="changeQty(this,1)">+</button></div></div>
-      </div>
-      <div class="prow" data-id="calzone" data-name="Le Calzone" data-price="13" data-old="16">
-        <div class="prow-l"><div class="pnum">06</div><div class="pthumb"><img src="https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=200&q=80" alt=""></div><div><div class="pname">Le Calzone <span class="pbdg">💰 Promo</span></div><div class="pdesc">Farci ricotta, jambon, mozzarella, sauce tomate.</div></div></div>
-        <div class="prow-r"><div class="pprice">13€ <span class="old">16€</span></div><div class="qty"><button class="qb" onclick="changeQty(this,-1)">−</button><span class="qn">0</span><button class="qb" onclick="changeQty(this,1)">+</button></div></div>
+      <div class="pizza-card-body">
+        <div class="pizza-tag">Classique</div>
+        <div class="pizza-name">La Margherita</div>
+        <div class="pizza-desc">Tomate, mozzarella, basilic frais, huile d'olive.</div>
+        <div class="pizza-footer"><div class="pizza-price">10€</div><div class="pizza-time">⏱ 20 min</div></div>
+        <button class="pizza-btn" onclick="pickPizza('La Margherita','10')">Commander →</button>
       </div>
     </div>
-  </div>
-  <div class="xbar">
-    <div class="xpill" data-id="tiramisu" data-name="Tiramisu" data-price="4" onclick="addExtra(this)"><div class="xpill-n">🍮 Tiramisu</div><div class="xpill-p">4€</div></div>
-    <div class="xpill" data-id="burrata" data-name="Burrata" data-price="5" onclick="addExtra(this)"><div class="xpill-n">🧀 Burrata</div><div class="xpill-p">5€</div></div>
-    <div class="xpill" data-id="sodapiz" data-name="Soda" data-price="2" onclick="addExtra(this)"><div class="xpill-n">🥤 Soda</div><div class="xpill-p">2€</div></div>
-    <div class="xpill" data-id="limonade" data-name="Limonade maison" data-price="3" onclick="addExtra(this)"><div class="xpill-n">🍋 Limonade</div><div class="xpill-p">3€</div></div>
+
+    <div class="pizza-card" onclick="pickPizza('La Slica Signature','14')">
+      <div class="pizza-float">
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=300&q=80&fit=crop" alt="Signature">
+      </div>
+      <div class="pizza-card-body">
+        <div class="pizza-tag">⭐ Best-seller</div>
+        <div class="pizza-name">La Signature</div>
+        <div class="pizza-desc">Sauce crémeuse, poulet grillé, poivrons, champignons.</div>
+        <div class="pizza-footer"><div class="pizza-price">14€</div><div class="pizza-time">⏱ 20 min</div></div>
+        <button class="pizza-btn" onclick="pickPizza('La Slica Signature','14')">Commander →</button>
+      </div>
+    </div>
+
+    <div class="pizza-card" onclick="pickPizza('La Viande','15')">
+      <div class="pizza-float">
+        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=300&q=80&fit=crop" alt="Viande">
+      </div>
+      <div class="pizza-card-body">
+        <div class="pizza-tag">Spéciale</div>
+        <div class="pizza-name">La Viande</div>
+        <div class="pizza-desc">Kefta, merguez, steak haché, oignons, harissa.</div>
+        <div class="pizza-footer"><div class="pizza-price">15€</div><div class="pizza-time">⏱ 20 min</div></div>
+        <button class="pizza-btn" onclick="pickPizza('La Viande','15')">Commander →</button>
+      </div>
+    </div>
+
+    <div class="pizza-card" onclick="pickPizza('La 4 Fromages','13')">
+      <div class="pizza-float">
+        <img src="https://images.unsplash.com/photo-1548369937-47519962c11a?w=300&q=80&fit=crop" alt="4 Fromages">
+      </div>
+      <div class="pizza-card-body">
+        <div class="pizza-tag">Végétarienne</div>
+        <div class="pizza-name">La 4 Fromages</div>
+        <div class="pizza-desc">Mozzarella, gorgonzola, parmesan, chèvre, miel.</div>
+        <div class="pizza-footer"><div class="pizza-price">13€</div><div class="pizza-time">⏱ 20 min</div></div>
+        <button class="pizza-btn" onclick="pickPizza('La 4 Fromages','13')">Commander →</button>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<!-- P4 COMMANDER -->
-<section id="p4" class="snap" style="display:grid;grid-template-columns:1fr 1fr">
-  <div class="cmd-l">
-    <div class="cmd-ttl">Comment<br>ça<br>marche</div>
-    <div class="steps">
-      <div class="step"><div class="sn">01</div><div><div class="st">Choisis tes pizzas</div><div class="sd">Ajoute depuis la carte. Tout s'ajoute en temps réel.</div></div></div>
-      <div class="step"><div class="sn">02</div><div>
-        <div class="st">Ton mode de retrait</div><div class="sd">Livraison, sur place ou à emporter.</div>
-        <div class="dopts">
-          <label class="dopt active" onclick="selectDelivery(this,'livraison')"><div class="dopt-i">🛵</div><div class="dopt-n">Livraison</div></label>
-          <label class="dopt" onclick="selectDelivery(this,'surplace')"><div class="dopt-i">🍽️</div><div class="dopt-n">Sur place</div></label>
-          <label class="dopt" onclick="selectDelivery(this,'emporter')"><div class="dopt-i">🥡</div><div class="dopt-n">Emporter</div></label>
-        </div>
-      </div></div>
-      <div class="step"><div class="sn">03</div><div><div class="st">1 clic WhatsApp</div><div class="sd">Message pré-rempli. Confirmé sous 2 min.</div></div></div>
-    </div>
-  </div>
-  <div class="cmd-r">
-    <div class="reg">
-      <div class="reg-l">📲 Ton numéro = tes points fidélité</div>
-      <div class="reg-r"><input class="reg-i" type="tel" id="phoneInput" placeholder="06 XX XX XX XX" maxlength="14"><button class="reg-b" onclick="registerPhone()">OK</button></div>
-      <div class="reg-ok" id="regOk">✅ Enregistré — tu cumules des points !</div>
-    </div>
-    <div class="fidel">
-      <div style="font-size:20px;flex-shrink:0">⭐</div>
-      <div><div class="ft">10e commande offerte</div><div class="fd">1 point par commande.</div><div class="fdots" id="fidelDots"></div></div>
-    </div>
-    <button class="reco" id="recoBtn" onclick="recommande()">🔄 Recommander la même chose</button>
-    <div class="cart-ttl-row">Ma commande <span class="cbdg" id="cartCount">0</span></div>
-    <div class="citems" id="cartItems"><div class="cempty">Choisis tes pizzas ↑</div></div>
-    <div class="ctot"><span class="ctl">Total</span><span class="ctv" id="cartTotal">0€</span></div>
-    <a href="#" class="wa" onclick="triggerUpsell(event)">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-      Commander sur WhatsApp
-    </a>
-    <p class="cnote">Confirmé sous 2 min · Paiement à la livraison</p>
+<!-- HOW IT WORKS — fond vert clair -->
+<section id="howto" class="section" style="background:var(--bg)">
+  <div class="sec-label">Simple & Rapide</div>
+  <h2 class="sec-title">Comment <span>ça marche</span></h2>
+  <div class="howto-grid">
+    <div class="step-card"><div class="step-num-badge">01</div><div class="step-icon-wrap">📱</div><div class="step-name">Choisis ta pizza</div><div class="step-desc">Sélectionne parmi notre carte faite maison.</div></div>
+    <div class="step-card"><div class="step-num-badge">02</div><div class="step-icon-wrap">✍️</div><div class="step-name">Passe commande</div><div class="step-desc">Envoie ta commande en 30 secondes sur WhatsApp.</div></div>
+    <div class="step-card"><div class="step-num-badge">03</div><div class="step-icon-wrap">🔥</div><div class="step-name">On prépare</div><div class="step-desc">Ta pizza est faite à la commande, jamais d'avance.</div></div>
+    <div class="step-card"><div class="step-num-badge">04</div><div class="step-icon-wrap">🛵</div><div class="step-name">Livraison express</div><div class="step-desc">Reçois ta pizza chaude en 30 minutes max.</div></div>
   </div>
 </section>
 
-<!-- P5 AVIS -->
-<section id="p5" class="snap">
-  <div class="avis-hdr">
-    <div class="avis-ttl">Ils ont<br><span>Kiffé</span></div>
+<!-- CONCEPT — fond blanc -->
+<section id="concept">
+  <div class="concept-img">
+    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=900&q=85&fit=crop" alt="Pizzeria">
+  </div>
+  <div class="concept-content">
+    <div class="sec-label" style="margin-bottom:14px">Notre Philosophie</div>
+    <h2 class="sec-title" style="margin-bottom:20px">Pas de <span>surgelé.</span><br>Jamais.</h2>
+    <p class="concept-text">Chez La Slica, chaque pizza commence par une pâte pétrie à la main le matin même. On ne fait pas de compromis — ingrédients frais du marché, cuisson au feu de bois, livraison rapide.<br><br>C'est notre promesse depuis le premier jour.</p>
+    <div class="concept-stats">
+      <div class="cstat"><div class="cstat-v">4.9★</div><div class="cstat-l">Note Google</div></div>
+      <div class="cstat"><div class="cstat-v">300+</div><div class="cstat-l">Avis clients</div></div>
+      <div class="cstat"><div class="cstat-v">30min</div><div class="cstat-l">Livraison max</div></div>
+      <div class="cstat"><div class="cstat-v">0%</div><div class="cstat-l">Surgelé</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMANDE -->
+<section id="commande" class="section" style="background:var(--bg)">
+  <div class="sec-label">Commande</div>
+  <h2 class="sec-title">Passe ta <span>Commande</span></h2>
+  <div class="commande-layout">
+    <div>
+      <div class="info-item"><div class="info-icon">📍</div><div><div class="info-lbl">Adresse</div><div class="info-val">Notre adresse · Votre ville</div></div></div>
+      <div class="info-item"><div class="info-icon">📞</div><div><div class="info-lbl">WhatsApp</div><div class="info-val">06 00 00 00 00</div></div></div>
+      <div class="info-item"><div class="info-icon">🕐</div><div><div class="info-lbl">Horaires</div><div class="info-val">7j/7 · 11h – 23h</div></div></div>
+      <div class="info-item"><div class="info-icon">🛵</div><div><div class="info-lbl">Livraison</div><div class="info-val">Confirmation sous 5 min · 30 min max</div></div></div>
+    </div>
+    <div class="commande-form">
+      <div class="form-title">🍕 Commander sur WhatsApp</div>
+      <div class="prog">
+        <div class="prog-step done" id="ps1"></div>
+        <div class="prog-step" id="ps2"></div>
+        <div class="prog-step" id="ps3"></div>
+        <div class="prog-step" id="ps4"></div>
+      </div>
+      <div class="step-lbl">I — Ta pizza</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div class="srv-chip" data-v="La Margherita" data-p="10" onclick="selS(this)"><div class="srv-chip-n">La Margherita</div><div class="srv-chip-p">10€</div></div>
+        <div class="srv-chip" data-v="La Slica Signature" data-p="14" onclick="selS(this)"><div class="srv-chip-n">La Slica Signature</div><div class="srv-chip-p">14€</div></div>
+        <div class="srv-chip" data-v="La Viande" data-p="15" onclick="selS(this)"><div class="srv-chip-n">La Viande</div><div class="srv-chip-p">15€</div></div>
+        <div class="srv-chip" data-v="La 4 Fromages" data-p="13" onclick="selS(this)"><div class="srv-chip-n">La 4 Fromages</div><div class="srv-chip-p">13€</div></div>
+      </div>
+      <div class="step-lbl">II — Mode de livraison</div>
+      <div class="g2">
+        <div class="chip" data-v="Livraison" onclick="selB(this)"><div class="chip-n">🛵 Livraison</div></div>
+        <div class="chip" data-v="À emporter" onclick="selB(this)"><div class="chip-n">🏃 À emporter</div></div>
+      </div>
+      <div class="step-lbl">III — Quand ?</div>
+      <div class="g4" id="cal-grid"></div>
+      <div id="hrs-wrap" style="display:none">
+        <div class="step-lbl">L'heure</div>
+        <div class="g4" id="hrs-grid"></div>
+      </div>
+      <div class="step-lbl">IV — Tes infos</div>
+      <input class="f-inp" type="text" id="c-name" placeholder="Ton prénom *">
+      <input class="f-inp" type="tel" id="c-tel" placeholder="Ton numéro WhatsApp *">
+      <input class="f-inp" type="text" id="c-adresse" placeholder="Ton adresse (si livraison)">
+      <div class="recap" id="recap">
+        <div class="recap-line">Pizza : <span id="rc-s">—</span></div>
+        <div class="recap-line">Mode : <span id="rc-b">—</span></div>
+        <div class="recap-line">Jour : <span id="rc-d">—</span></div>
+        <div class="recap-line">Heure : <span id="rc-t">—</span></div>
+        <div class="recap-line">Prix : <span id="rc-p">—</span></div>
+      </div>
+      <button class="btn-wa" onclick="sendWA()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Confirmer sur WhatsApp
+      </button>
+      <p class="form-note">Confirmation sous 5 min · Livraison 30 min max</p>
+    </div>
+  </div>
+</section>
+
+<!-- AVIS — fond blanc -->
+<section id="avis" class="section" style="background:var(--w)">
+  <div class="avis-layout">
     <div class="avis-score">
       <div class="avis-num">4.9</div>
-      <div><div class="avis-stars">★★★★★</div><div class="avis-cnt">180+ avis Google vérifiés</div><a href="#" style="font-size:10px;color:var(--v);font-family:'Barlow Condensed',sans-serif;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;display:block;margin-top:5px">⭐ Laisser un avis →</a></div>
+      <div class="avis-stars">★★★★★</div>
+      <div class="avis-cnt">300+ avis Google</div>
+      <a href="#" class="avis-lnk">Laisser un avis →</a>
     </div>
-  </div>
-  <div class="revcols">
-    <div class="revcol"><div class="rev-st">★★★★★</div><div class="rev-q">"La pâte c'est une autre planète. Moelleuse à l'intérieur, croustillante dehors. On sent que c'est fait maison. La meilleure pizza du secteur, point."</div><div class="rev-a">Sofia M.</div></div>
-    <div class="revcol"><div class="rev-st">★★★★★</div><div class="rev-q">"La Diavola c'est un feu d'artifice. Juste assez piquante, les ingrédients sont frais. Livraison en 25 min, pizza encore chaude. Je commande deux fois par semaine."</div><div class="rev-a">Rachid B.</div></div>
-    <div class="revcol"><div class="rev-st">★★★★★</div><div class="rev-q">"La Suprême avec la truffe c'est de la folie. On est dans une pizzeria de quartier mais le niveau c'est restaurant gastronomique. Chapeau."</div><div class="rev-a">Inès K.</div></div>
+    <div>
+      <div class="sec-label">Témoignages</div>
+      <h2 class="sec-title" style="margin-bottom:28px">Ils sont <span>revenus.</span></h2>
+      <div class="avis-cols">
+        <div class="avis-card">
+          <div class="avis-st">★★★★★</div>
+          <div class="avis-txt">"La meilleure pizza du secteur. La pâte est vraiment fraîche, ça se sent dès la première bouchée."</div>
+          <div class="avis-author-row">
+            <div class="avis-avatar">K</div>
+            <div><div class="avis-auth">Karim D.</div><div class="avis-by">La Signature</div></div>
+          </div>
+        </div>
+        <div class="avis-card">
+          <div class="avis-st">★★★★★</div>
+          <div class="avis-txt">"Livraison rapide, pizza chaude à l'arrivée. La Viande c'est une tuerie. Je commande 2 fois par semaine."</div>
+          <div class="avis-author-row">
+            <div class="avis-avatar">M</div>
+            <div><div class="avis-auth">Mehdi S.</div><div class="avis-by">La Viande</div></div>
+          </div>
+        </div>
+        <div class="avis-card">
+          <div class="avis-st">★★★★★</div>
+          <div class="avis-txt">"Enfin une vraie pizzeria sans surgelé. On le sent vraiment dans la pâte. Client à vie."</div>
+          <div class="avis-author-row">
+            <div class="avis-avatar">B</div>
+            <div><div class="avis-auth">Bilal T.</div><div class="avis-by">La Margherita</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- P6 FOOTER -->
-<section id="p6" class="snap">
-  <div class="ft-bgw">SLICA</div>
+<!-- FOOTER -->
+<footer>
+  <div class="ft-bg">Slica</div>
   <div style="position:relative;z-index:1">
-    <a href="#p1" class="ft-logo">La Slica</a>
-    <div class="ft-sub">Pizza Street Authentique — Napoli × Street</div>
+    <div class="ft-logo">La <span>Slica</span></div>
+    <div class="ft-sub">Pizza Street — Pas de surgelé. Jamais.</div>
     <div class="ft-grid">
-      <div><div class="ftl">Contact</div><div class="fti">📍 <strong>Notre quartier · Votre ville</strong></div><div class="fti">📞 <strong>06 00 00 00 00</strong></div><div class="fti">🕐 <strong>7j/7 · 17h – 23h</strong></div></div>
-      <div><div class="ftl">Livraison</div><div class="fti"><strong>Rayon 5km</strong></div><div class="fti">~25 min · Paiement livraison</div><div class="fti" style="margin-top:10px"><a href="https://wa.me/33600000000?text=Zone%20livraison%20?" target="_blank" style="color:var(--vv);font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none">Vérifier ma zone →</a></div></div>
-      <div><div class="ftl">Commander</div><div style="display:flex;flex-direction:column;gap:10px;margin-top:4px"><a href="https://wa.me/33600000000" target="_blank" class="btn-v" style="display:inline-flex;width:fit-content"><span>Commander →</span></a><a href="#" class="btn-g" style="width:fit-content;font-size:12px;padding:10px 18px">⭐ Laisser un avis</a></div></div>
+      <div>
+        <div class="ft-lbl">Contact</div>
+        <div class="ft-item">📍 <strong>Notre adresse · Votre ville</strong></div>
+        <div class="ft-item">📞 <strong>06 00 00 00 00</strong></div>
+        <div class="ft-item">🕐 <strong>7j/7 · 11h – 23h</strong></div>
+      </div>
+      <div>
+        <div class="ft-lbl">Nos Pizzas</div>
+        <div class="ft-item"><strong>La Margherita</strong> · 10€</div>
+        <div class="ft-item"><strong>La Signature</strong> · 14€</div>
+        <div class="ft-item"><strong>La Viande</strong> · 15€</div>
+        <div class="ft-item"><strong>La 4 Fromages</strong> · 13€</div>
+      </div>
+      <div>
+        <div class="ft-lbl">Commander</div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px">
+          <a href="#commande" class="btn-main" style="font-size:12px;padding:12px 24px">🍕 Commander →</a>
+          <a href="#avis" style="display:inline-flex;align-items:center;font-size:12px;padding:12px 24px;color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.15);border-radius:50px;text-decoration:none;font-weight:600;">⭐ Laisser un avis</a>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="ft-btm"><span class="ft-copy">© 2025 La Slica — Pizza Street Authentique</span><span class="ft-copy">fait avec 🍕</span></div>
-</section>
-
-<!-- UPSELL -->
-<div class="modal-bg" id="upsellModal">
-  <div class="modal-box">
-    <div class="mh"><div class="mt">Attends... 👀</div></div>
-    <div class="mb">
-      <div class="ms">Les gens qui commandent ça prennent aussi :</div>
-      <div class="ur"><div><div class="un">🍮 Tiramisu maison</div><div class="usub">Fait maison, crémeux</div></div><div class="urr"><div class="up">4€</div><button class="ua" onclick="addUpsell('tir-up','Tiramisu maison',4,this)">+ Ajouter</button></div></div>
-      <div class="ur"><div><div class="un">🧀 Burrata</div><div class="usub">Apulienne, huile d'olive</div></div><div class="urr"><div class="up">5€</div><button class="ua" onclick="addUpsell('bur-up','Burrata',5,this)">+ Ajouter</button></div></div>
-      <div class="ur"><div><div class="un">🍋 Limonade maison</div><div class="usub">Citron pressé, menthe</div></div><div class="urr"><div class="up">3€</div><button class="ua" onclick="addUpsell('lim-up','Limonade maison',3,this)">+ Ajouter</button></div></div>
-    </div>
-    <div class="mf"><button class="mok" onclick="closeUpsell()">✅ C'est bon, commander</button><button class="msk" onclick="closeUpsell()">Non merci</button></div>
+  <div class="ft-bottom">
+    <span class="ft-copy">© 2025 La Slica — Pizza Street</span>
+    <span class="ft-copy">fait avec 🍕</span>
   </div>
-</div>
+</footer>
 
-<!-- NOTIF -->
-<div class="notif" id="liveNotif">
-  <div class="notif-top"><div class="ndot"></div><div class="nlbl">Commande en direct</div></div>
-  <div class="nbody"><div class="nname" id="notifName">Sofia M.</div><div class="ntxt" id="notifTxt">vient de commander une <strong>La Suprême</strong></div><div class="ntime" id="notifTime">il y a 3 min</div></div>
-</div>
-
-<!-- STICKY -->
-<div class="sticky" id="stickyBar">
-  <span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--g)">Ta commande</span>
-  <span class="sticky-t">Total : <span id="stickyTot">0€</span></span>
-  <a href="#" onclick="triggerUpsell(event)" class="wa" style="width:auto;padding:11px 18px;font-size:12px">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-    Commander
-  </a>
+<!-- NOTIF blanc + vert -->
+<div class="notif" id="notif">
+  <div class="notif-top"><div class="ndot"></div><div class="nlbl">Commande en cours</div></div>
+  <div class="nbody">
+    <div class="nname" id="n-name">Karim</div>
+    <div class="ntxt" id="n-txt">vient de commander <strong>La Slica Signature</strong></div>
+    <div class="ntime" id="n-time">il y a 3 min</div>
+  </div>
 </div>
 
 <script>
-const menuData={};
-document.querySelectorAll('.prow').forEach(r=>{if(r.dataset.id)menuData[r.dataset.id]={name:r.dataset.name,price:parseFloat(r.dataset.price)}});
-let cart={},deliveryMode='livraison',upsellShown=false;
-let orderCount=parseInt(localStorage.getItem('ls_orders')||'0');
+window.addEventListener('scroll', function() {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 80);
+});
 
-function renderFidel(){const d=document.getElementById('fidelDots');if(!d)return;d.innerHTML=Array.from({length:10},(_,i)=>`<div class="fdot ${i<orderCount?'on':''}"></div>`).join('');if(orderCount>=1)document.getElementById('recoBtn')?.classList.add('show')}
-renderFidel();
+var vid = document.getElementById('heroVid');
+if (vid) {
+  vid.muted = true; vid.playbackRate = 1.2;
+  vid.setAttribute('playsinline','');
+  vid.addEventListener('ended', function(){ vid.currentTime=0; vid.pause(); });
+  function tryPlay(){ vid.play().catch(function(){}); }
+  tryPlay(); setTimeout(tryPlay,600); setTimeout(tryPlay,1600);
+  document.addEventListener('touchstart', tryPlay, {once:true});
+  document.addEventListener('click', tryPlay, {once:true});
+}
 
-const sp=localStorage.getItem('ls_phone');
-if(sp){const inp=document.getElementById('phoneInput');if(inp){inp.value=sp;inp.disabled=true}document.getElementById('regOk').style.display='block';const btn=document.querySelector('.reg-b');if(btn)btn.disabled=true}
-
-function registerPhone(){const p=document.getElementById('phoneInput').value.trim();if(p.length<10){alert('Numéro invalide');return}localStorage.setItem('ls_phone',p);document.getElementById('regOk').style.display='block';document.getElementById('phoneInput').disabled=true;document.querySelector('.reg-b').disabled=true}
-
-function recommande(){const s=localStorage.getItem('ls_last');if(!s)return;cart=JSON.parse(s);document.querySelectorAll('.prow').forEach(r=>{const n=r.querySelector('.qn');if(n)n.textContent=cart[r.dataset.id]?.qty||0});updateCart();document.getElementById('p4')?.scrollIntoView({behavior:'smooth'})}
-
-function changeQty(btn,delta){const row=btn.closest('.prow');const id=row.dataset.id;const n=btn.parentElement.querySelector('.qn');let v=Math.max(0,(parseInt(n.textContent)||0)+delta);n.textContent=v;if(v===0)delete cart[id];else cart[id]={name:menuData[id].name,price:menuData[id].price,qty:v};updateCart();if(delta>0&&!upsellShown){clearTimeout(window._ut);window._ut=setTimeout(()=>{document.getElementById('upsellModal').classList.add('show');upsellShown=true},1000)}}
-
-function addExtra(el){const id=el.dataset.id,name=el.dataset.name,price=parseFloat(el.dataset.price);if(!cart[id])cart[id]={name,price,qty:0};cart[id].qty++;updateCart();el.style.background='rgba(30,140,71,.4)';setTimeout(()=>el.style.background='',600)}
-
-function addUpsell(id,name,price,btn){if(!cart[id])cart[id]={name,price,qty:0};cart[id].qty++;updateCart();btn.textContent='OK';btn.style.background='#25D366';btn.disabled=true}
-
-function selectDelivery(el,mode){document.querySelectorAll('.dopt').forEach(o=>o.classList.remove('active'));el.classList.add('active');deliveryMode=mode}
-
-function triggerUpsell(e){e.preventDefault();if(!Object.values(cart).some(i=>i.qty>0)){alert('Choisis au moins une pizza !');return}sendWhatsApp()}
-
-function closeUpsell(){document.getElementById('upsellModal').classList.remove('show')}
-
-function sendWhatsApp(){const items=Object.values(cart).filter(i=>i.qty>0);if(!items.length)return;const ml={livraison:'Livraison',surplace:'Sur place',emporter:'À emporter'}[deliveryMode];const ph=localStorage.getItem('ls_phone')||'';const lines=items.map(i=>`- ${i.qty}x ${i.name} ${(i.price*i.qty).toFixed(0)}EUR`).join('\n');const total=items.reduce((s,i)=>s+i.price*i.qty,0);const phLine=ph?`\nFidelite: ${ph}`:'';const msg=`Yo je veux commander 🍕\n\n${lines}\n\nTotal: ${total}EUR\nMode: ${ml}${phLine}\n\nMerci!`;localStorage.setItem('ls_last',JSON.stringify(cart));orderCount++;localStorage.setItem('ls_orders',orderCount.toString());renderFidel();window.open('https://wa.me/33600000000?text='+encodeURIComponent(msg),'_blank');setTimeout(()=>showReview(),3000)}
-
-function showReview(){document.getElementById('notifName').textContent='Merci !';document.getElementById('notifTxt').innerHTML='Un avis Google nous aide vraiment 🙏 <a href="#" style="color:var(--vv)">Laisser un avis</a>';document.getElementById('notifTime').textContent='30 secondes';const el=document.getElementById('liveNotif');el.classList.add('show');setTimeout(()=>el.classList.remove('show'),8000)}
-
-function updateCart(){const items=Object.values(cart).filter(i=>i.qty>0);const total=items.reduce((s,i)=>s+i.price*i.qty,0);const count=items.reduce((s,i)=>s+i.qty,0);const el=document.getElementById('cartItems');el.innerHTML=items.length?items.map(i=>`<div class="citem"><div><div class="cin">${i.name}</div><div class="ciq">x${i.qty}</div></div><div class="cip">${(i.price*i.qty).toFixed(0)}EUR</div></div>`).join(''):'<div class="cempty">Choisis tes pizzas &uarr;</div>';document.getElementById('cartTotal').textContent=total+'EUR';document.getElementById('cartCount').textContent=count;document.getElementById('stickyTot').textContent=total+'EUR';count>0?document.getElementById('stickyBar').classList.add('show'):document.getElementById('stickyBar').classList.remove('show')}
-
-window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('dark',window.scrollY>80));
-
-const notifs=[{n:'Sofia M.',t:'vient de commander une <strong>La Suprême</strong>',time:'il y a 2 min'},{n:'Rachid B.',t:'vient de commander une <strong>La Diavola</strong>',time:'il y a 5 min'},{n:'Ines K.',t:'vient de commander une <strong>La 4 Fromages</strong>',time:'il y a 8 min'},{n:'Karim T.',t:'vient de commander <strong>2x La Margherita</strong>',time:'il y a 11 min'},{n:'Amira L.',t:'vient de commander <strong>Le Calzone</strong>',time:'il y a 14 min'}];
-let ni=0;
-function showNotif(){const n=notifs[ni%notifs.length];document.getElementById('notifName').textContent=n.n;document.getElementById('notifTxt').innerHTML=n.t;document.getElementById('notifTime').textContent=n.time;const el=document.getElementById('liveNotif');el.classList.add('show');setTimeout(()=>el.classList.remove('show'),5000);ni++}
-setTimeout(()=>{showNotif();setInterval(showNotif,10000)},4000);
-
-document.getElementById('upsellModal').addEventListener('click',e=>{if(e.target===document.getElementById('upsellModal'))closeUpsell()});
-
-const hv=document.getElementById('heroVideo');
-if(hv){hv.muted=true;hv.setAttribute('playsinline','');hv.addEventListener('ended',()=>{hv.currentTime=0;hv.pause()});const tp=()=>hv.play().catch(()=>{});tp();setTimeout(tp,500);setTimeout(tp,1500);['touchstart','click'].forEach(e=>document.addEventListener(e,()=>tp(),{once:true}))}
+var R = { s:'', b:'', p:'', d:'', t:'' };
+function updBar() {
+  var v=[R.s,R.b,R.d,R.t];
+  for(var i=0;i<4;i++) document.getElementById('ps'+(i+1)).classList.toggle('done',!!v[i]);
+}
+function updRecap() {
+  var ok=R.s&&R.b&&R.d&&R.t;
+  document.getElementById('recap').classList.toggle('show',ok);
+  if(ok){
+    document.getElementById('rc-s').textContent=R.s;
+    document.getElementById('rc-b').textContent=R.b;
+    document.getElementById('rc-d').textContent=R.d;
+    document.getElementById('rc-t').textContent=R.t;
+    document.getElementById('rc-p').textContent=R.p+'€';
+  }
+  updBar();
+}
+function selS(el){
+  document.querySelectorAll('.srv-chip').forEach(function(e){e.classList.remove('on');});
+  el.classList.add('on'); R.s=el.getAttribute('data-v'); R.p=el.getAttribute('data-p'); updRecap();
+}
+function selB(el){
+  document.querySelectorAll('.g2 .chip').forEach(function(e){e.classList.remove('on');});
+  el.classList.add('on'); R.b=el.getAttribute('data-v'); updRecap();
+}
+function pickPizza(name,price){
+  document.querySelectorAll('.srv-chip').forEach(function(el){if(el.getAttribute('data-v')===name)selS(el);});
+  document.getElementById('commande').scrollIntoView({behavior:'smooth'});
+}
+(function(){
+  var grid=document.getElementById('cal-grid');
+  var j=['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
+  var now=new Date(); var cnt=0;
+  for(var i=0;i<=8&&cnt<8;i++){
+    var d=new Date(now); d.setDate(now.getDate()+i);
+    var el=document.createElement('div'); el.className='cal-chip';
+    el.innerHTML='<div class="cal-n">'+d.getDate()+'</div><div class="cal-l">'+j[d.getDay()]+'</div>';
+    el.setAttribute('data-date',j[d.getDay()]+' '+d.getDate()+'/'+(d.getMonth()+1));
+    el.addEventListener('click',(function(e){return function(){
+      document.querySelectorAll('.cal-chip').forEach(function(x){x.classList.remove('on');});
+      e.classList.add('on'); R.d=e.getAttribute('data-date'); buildHrs(); updRecap();
+    };})(el));
+    grid.appendChild(el); cnt++;
+  }
+})();
+function buildHrs(){
+  var grid=document.getElementById('hrs-grid'); var wrap=document.getElementById('hrs-wrap');
+  grid.innerHTML=''; wrap.style.display='block';
+  var slots=['11:00','11:30','12:00','12:30','13:00','13:30','18:00','18:30','19:00','19:30','20:00','20:30','21:00','21:30','22:00','22:30'];
+  var taken=['12:00','19:30','21:00'];
+  slots.forEach(function(t){
+    var el=document.createElement('div');
+    el.className='hr-chip'+(taken.indexOf(t)>=0?' taken':'');
+    el.textContent=t;
+    el.addEventListener('click',(function(e,time){return function(){
+      document.querySelectorAll('.hr-chip').forEach(function(x){x.classList.remove('on');});
+      e.classList.add('on'); R.t=time; updRecap();
+    };})(el,t));
+    grid.appendChild(el);
+  });
+}
+function sendWA(){
+  var prenom=document.getElementById('c-name').value.trim()||'Client';
+  var tel=document.getElementById('c-tel').value.trim();
+  var adresse=document.getElementById('c-adresse').value.trim();
+  if(!R.s||!R.b||!R.d||!R.t){alert('Merci de compléter toutes les étapes.');return;}
+  var msg='Salam, je veux commander 🍕\n\nPizza : '+R.s+'\nMode : '+R.b+'\nJour : '+R.d+'\nHeure : '+R.t+'\nPrénom : '+prenom+(tel?'\nNuméro : '+tel:'')+(adresse?'\nAdresse : '+adresse:'')+'\n\nMerci !';
+  window.open('https://wa.me/33600000000?text='+encodeURIComponent(msg),'_blank');
+}
+var notifs=[
+  {n:'Karim',t:'vient de commander <strong>La Slica Signature</strong>',time:'il y a 3 min'},
+  {n:'Mehdi',t:'vient de commander <strong>La Viande</strong>',time:'il y a 8 min'},
+  {n:'Issa',t:'vient de commander <strong>La 4 Fromages</strong>',time:'il y a 12 min'},
+  {n:'Bilal',t:'vient de commander <strong>La Margherita</strong>',time:'il y a 18 min'},
+];
+var ni=0;
+function showNotif(){
+  var n=notifs[ni%notifs.length];
+  document.getElementById('n-name').textContent=n.n;
+  document.getElementById('n-txt').innerHTML=n.t;
+  document.getElementById('n-time').textContent=n.time;
+  var el=document.getElementById('notif');
+  el.classList.add('show');
+  setTimeout(function(){el.classList.remove('show');},5000); ni++;
+}
+setTimeout(function(){showNotif();setInterval(showNotif,12000);},6000);
 </script>
 </body>
 </html>
